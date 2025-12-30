@@ -3,10 +3,12 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>הדרכה מחוז ירושלים - מיזם המחוז</title>
+    <title>מיזם גיאומטריה עם בינה מלאכותית - הדרכה מחוז ירושלים</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Assistant:wght@300;400;700;900&family=Heebo:wght@300;400;700;900&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
     <style>
         * {
             margin: 0;
@@ -14,224 +16,762 @@
             box-sizing: border-box;
         }
 
+        :root {
+            --premium-blue: #001B3D;
+            --gold: #D4AF37;
+            --turquoise: #40E0D0;
+            --white: #FFFFFF;
+            --dark-blue: #0a1a2e;
+        }
+
         body {
-            font-family: 'Heebo', sans-serif;
+            font-family: 'Assistant', 'Heebo', sans-serif;
             direction: rtl;
             text-align: right;
-            background: linear-gradient(135deg, #0a1929 0%, #1a2332 100%);
-            color: #ffffff;
+            background: var(--premium-blue);
+            background-image: 
+                radial-gradient(circle at 20% 50%, rgba(212, 175, 55, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(64, 224, 208, 0.1) 0%, transparent 50%);
+            color: var(--white);
             line-height: 1.8;
             overflow-x: hidden;
+            font-weight: 400;
         }
 
-        .header {
-            background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
-            padding: 20px;
+        /* Top Banner - Gold Header */
+        .top-banner {
+            background: linear-gradient(135deg, rgba(212, 175, 55, 0.15) 0%, rgba(212, 175, 55, 0.05) 100%);
+            padding: 15px 20px;
             text-align: center;
-            box-shadow: 0 4px 20px rgba(255, 215, 0, 0.3);
-            position: sticky;
-            top: 0;
-            z-index: 1000;
+            border-bottom: 2px solid rgba(212, 175, 55, 0.3);
+            backdrop-filter: blur(10px);
         }
 
-        .header h1 {
+        .top-banner p {
+            font-size: 0.95rem;
+            font-weight: 400;
+            color: var(--gold);
+            letter-spacing: 1.5px;
+            text-shadow: 0 0 15px rgba(212, 175, 55, 0.6);
+            animation: subtleGlow 3s ease-in-out infinite alternate;
+        }
+
+        @keyframes subtleGlow {
+            from { text-shadow: 0 0 15px rgba(212, 175, 55, 0.6); }
+            to { text-shadow: 0 0 25px rgba(212, 175, 55, 0.9), 0 0 35px rgba(212, 175, 55, 0.5); }
+        }
+
+        /* Main Title - Glowing White */
+        .main-title {
+            text-align: center;
+            padding: 40px 20px;
+            position: relative;
+        }
+
+        .main-title h1 {
+            font-size: 3.5rem;
+            font-weight: 900;
+            color: var(--white);
+            text-shadow: 
+                0 0 20px rgba(255, 255, 255, 0.8),
+                0 0 40px rgba(255, 255, 255, 0.6),
+                0 0 60px rgba(255, 255, 255, 0.4);
+            animation: titlePulse 4s ease-in-out infinite;
+            margin-bottom: 20px;
+        }
+
+        @keyframes titlePulse {
+            0%, 100% { 
+                transform: scale(1);
+                text-shadow: 
+                    0 0 20px rgba(255, 255, 255, 0.8),
+                    0 0 40px rgba(255, 255, 255, 0.6),
+                    0 0 60px rgba(255, 255, 255, 0.4);
+            }
+            50% { 
+                transform: scale(1.02);
+                text-shadow: 
+                    0 0 30px rgba(255, 255, 255, 1),
+                    0 0 60px rgba(255, 255, 255, 0.8),
+                    0 0 90px rgba(255, 255, 255, 0.6);
+            }
+        }
+
+        /* Hero Section with Video */
+        .hero-section {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        .video-wrapper {
+            position: relative;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 
+                0 20px 60px rgba(0, 0, 0, 0.5),
+                0 0 40px rgba(212, 175, 55, 0.3),
+                inset 0 0 60px rgba(64, 224, 208, 0.1);
+            border: 3px solid rgba(212, 175, 55, 0.4);
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            animation: videoGlow 3s ease-in-out infinite alternate;
+        }
+
+        @keyframes videoGlow {
+            from { 
+                box-shadow: 
+                    0 20px 60px rgba(0, 0, 0, 0.5),
+                    0 0 40px rgba(212, 175, 55, 0.3),
+                    inset 0 0 60px rgba(64, 224, 208, 0.1);
+            }
+            to { 
+                box-shadow: 
+                    0 20px 60px rgba(0, 0, 0, 0.5),
+                    0 0 60px rgba(212, 175, 55, 0.5),
+                    inset 0 0 80px rgba(64, 224, 208, 0.2);
+            }
+        }
+
+        .video-wrapper iframe {
+            width: 100%;
+            height: 650px;
+            border: none;
+            display: block;
+        }
+
+        .sub-heading {
+            text-align: center;
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--turquoise);
+            text-shadow: 0 0 20px rgba(64, 224, 208, 0.6);
+            margin: 30px 0;
+            padding: 20px;
+        }
+
+        /* Glassmorphism Cards */
+        .glass-card {
+            background: rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(20px);
+            border-radius: 25px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 
+                0 8px 32px rgba(0, 0, 0, 0.3),
+                inset 0 1px 0 rgba(255, 255, 255, 0.1);
+            padding: 40px;
+            margin: 40px auto;
+            max-width: 1200px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .glass-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 
+                0 12px 48px rgba(0, 0, 0, 0.4),
+                0 0 30px rgba(212, 175, 55, 0.2),
+                inset 0 1px 0 rgba(255, 255, 255, 0.2);
+        }
+
+        .section-title {
             font-size: 2.5rem;
             font-weight: 900;
-            color: #FFD700;
-            text-shadow: 0 0 20px rgba(255, 215, 0, 0.8), 0 0 40px rgba(255, 215, 0, 0.5);
-            animation: glow 2s ease-in-out infinite alternate;
-        }
-
-        @keyframes glow {
-            from { text-shadow: 0 0 20px rgba(255, 215, 0, 0.8), 0 0 40px rgba(255, 215, 0, 0.5); }
-            to { text-shadow: 0 0 30px rgba(255, 215, 0, 1), 0 0 60px rgba(255, 215, 0, 0.8); }
-        }
-
-        .hero {
             text-align: center;
-            padding: 60px 20px;
+            margin-bottom: 40px;
+            background: linear-gradient(135deg, var(--white) 0%, var(--turquoise) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-shadow: 0 0 30px rgba(255, 255, 255, 0.5);
+            position: relative;
+        }
+
+        .section-title.gold {
+            background: linear-gradient(135deg, var(--gold) 0%, #FFD700 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .section-title.turquoise {
+            background: linear-gradient(135deg, var(--turquoise) 0%, #00CED1 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -15px;
+            right: 50%;
+            transform: translateX(50%);
+            width: 100px;
+            height: 3px;
+            background: linear-gradient(90deg, transparent, var(--gold), transparent);
+            box-shadow: 0 0 10px var(--gold);
+        }
+
+        /* Content Styling */
+        .content-text {
+            font-size: 1.15rem;
+            line-height: 2;
+            color: rgba(255, 255, 255, 0.9);
+            margin-bottom: 20px;
+        }
+
+        .content-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .content-list li {
+            padding: 15px 0 15px 50px;
+            position: relative;
+            font-size: 1.1rem;
+            line-height: 1.9;
+            color: rgba(255, 255, 255, 0.85);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .content-list li:last-child {
+            border-bottom: none;
+        }
+
+        .content-list li::before {
+            content: '✨';
+            position: absolute;
+            right: 0;
+            font-size: 1.5rem;
+            animation: iconFloat 2s ease-in-out infinite;
+        }
+
+        @keyframes iconFloat {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-5px) rotate(10deg); }
+        }
+
+        .numbered-list {
+            counter-reset: item;
+            list-style: none;
+            padding: 0;
+        }
+
+        .numbered-list li {
+            counter-increment: item;
+            padding: 20px 0 20px 60px;
+            position: relative;
+            font-size: 1.15rem;
+            line-height: 2;
+            color: rgba(255, 255, 255, 0.9);
+            margin-bottom: 15px;
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 15px;
+            border-right: 3px solid var(--gold);
+        }
+
+        .numbered-list li::before {
+            content: counter(item);
+            position: absolute;
+            right: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, var(--gold), #FFD700);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 900;
+            color: var(--premium-blue);
+            box-shadow: 0 0 20px rgba(212, 175, 55, 0.5);
+        }
+
+        /* Links */
+        .premium-link {
+            color: var(--gold);
+            text-decoration: none;
+            font-weight: 700;
+            border-bottom: 2px solid var(--gold);
+            transition: all 0.3s ease;
+            display: inline-block;
+            text-shadow: 0 0 10px rgba(212, 175, 55, 0.5);
+        }
+
+        .premium-link:hover {
+            color: #FFD700;
+            border-bottom-color: #FFD700;
+            text-shadow: 0 0 20px rgba(255, 215, 0, 0.8);
+            transform: translateY(-2px);
+        }
+
+        /* CTA Button */
+        .cta-button {
+            display: inline-block;
+            padding: 20px 50px;
+            background: linear-gradient(135deg, var(--gold) 0%, #FFD700 100%);
+            color: var(--premium-blue);
+            font-size: 1.3rem;
+            font-weight: 900;
+            text-decoration: none;
+            border-radius: 50px;
+            box-shadow: 
+                0 10px 40px rgba(212, 175, 55, 0.4),
+                0 0 30px rgba(212, 175, 55, 0.3),
+                inset 0 2px 0 rgba(255, 255, 255, 0.3);
+            transition: all 0.3s ease;
+            text-align: center;
+            margin: 30px auto;
+            display: block;
+            max-width: 400px;
             position: relative;
             overflow: hidden;
         }
 
-        .hero h2 {
-            font-size: 3rem;
-            font-weight: 900;
-            color: #00BFFF;
-            text-shadow: 0 0 30px rgba(0, 191, 255, 0.8);
-            margin-bottom: 30px;
-            animation: pulse 3s ease-in-out infinite;
-            position: relative;
-            z-index: 2;
-        }
-
-        @keyframes pulse {
-            0%, 100% { transform: scale(1); text-shadow: 0 0 30px rgba(0, 191, 255, 0.8); }
-            50% { transform: scale(1.05); text-shadow: 0 0 50px rgba(0, 191, 255, 1); }
-        }
-
-        .stars {
+        .cta-button::before {
+            content: '';
             position: absolute;
-            width: 100%;
-            height: 100%;
-            top: 0;
-            left: 0;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.3);
+            transform: translate(-50%, -50%);
+            transition: width 0.6s, height 0.6s;
+        }
+
+        .cta-button:hover::before {
+            width: 300px;
+            height: 300px;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 
+                0 15px 50px rgba(212, 175, 55, 0.6),
+                0 0 40px rgba(212, 175, 55, 0.5),
+                inset 0 2px 0 rgba(255, 255, 255, 0.4);
+        }
+
+        .cta-button span {
+            position: relative;
             z-index: 1;
         }
 
-        .star {
-            position: absolute;
-            width: 4px;
-            height: 4px;
-            background: #FFD700;
-            border-radius: 50%;
-            box-shadow: 0 0 10px #FFD700;
-            animation: twinkle 2s infinite;
+        /* Timeline */
+        .timeline {
+            position: relative;
+            padding: 40px 0;
         }
 
-        @keyframes twinkle {
-            0%, 100% { opacity: 0.3; transform: scale(1); }
-            50% { opacity: 1; transform: scale(1.5); }
-        }
-
-        .badge {
-            display: inline-block;
-            background: linear-gradient(135deg, #FFD700 0%, #FFA500 100%);
-            color: #1a1a1a;
-            padding: 15px 30px;
-            border-radius: 50px;
-            font-weight: 700;
-            font-size: 1.2rem;
-            box-shadow: 0 0 30px rgba(255, 215, 0, 0.6);
-            animation: float 3s ease-in-out infinite;
-            margin: 20px 0;
-        }
-
-        @keyframes float {
-            0%, 100% { transform: translateY(0px); }
-            50% { transform: translateY(-10px); }
-        }
-
-        .video-container {
-            max-width: 1200px;
-            margin: 40px auto;
-            padding: 20px;
+        .timeline-item {
+            position: relative;
+            padding: 30px 30px 30px 80px;
+            margin-bottom: 30px;
             background: rgba(255, 255, 255, 0.05);
-            border-radius: 20px;
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
-        }
-
-        .video-container iframe {
-            width: 100%;
-            height: 600px;
             border-radius: 15px;
-            border: 3px solid rgba(255, 215, 0, 0.3);
+            border-right: 4px solid var(--gold);
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
         }
 
-        .section {
-            max-width: 1200px;
-            margin: 60px auto;
-            padding: 40px 20px;
-            background: rgba(255, 255, 255, 0.03);
-            border-radius: 20px;
-            border: 1px solid rgba(255, 215, 0, 0.2);
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            right: -12px;
+            top: 30px;
+            width: 20px;
+            height: 20px;
+            background: var(--gold);
+            border-radius: 50%;
+            box-shadow: 0 0 20px var(--gold);
+            border: 3px solid var(--premium-blue);
         }
 
-        .section h3 {
-            font-size: 2rem;
+        .timeline-date {
+            font-size: 1.3rem;
             font-weight: 700;
-            color: #FFD700;
-            margin-bottom: 25px;
-            text-align: center;
-            text-shadow: 0 0 15px rgba(255, 215, 0, 0.5);
+            color: var(--gold);
+            margin-bottom: 10px;
+            text-shadow: 0 0 15px rgba(212, 175, 55, 0.6);
         }
 
-        .section p, .section li {
+        .timeline-text {
             font-size: 1.1rem;
-            line-height: 1.9;
-            margin-bottom: 15px;
-            color: #e0e0e0;
+            color: rgba(255, 255, 255, 0.85);
+            line-height: 1.8;
         }
 
+        /* Media Embeds */
+        .media-container {
+            margin: 40px auto;
+            max-width: 1200px;
+            padding: 20px;
+        }
+
+        .media-container iframe {
+            width: 100%;
+            border-radius: 15px;
+            border: 2px solid rgba(212, 175, 55, 0.3);
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.4);
+        }
+
+        .youtube-embed {
+            height: 600px;
+        }
+
+        .canva-embed {
+            height: 800px;
+        }
+
+        /* Form Container */
         .form-container {
-            max-width: 800px;
+            max-width: 900px;
             margin: 40px auto;
             padding: 30px;
-            background: rgba(255, 255, 255, 0.05);
-            border-radius: 20px;
-            border: 2px solid rgba(255, 215, 0, 0.3);
         }
 
         .form-container iframe {
             width: 100%;
             min-height: 1200px;
             border: none;
-            border-radius: 10px;
+            border-radius: 15px;
+            background: rgba(255, 255, 255, 0.05);
         }
 
+        /* Signature */
+        .signature {
+            text-align: center;
+            padding: 60px 20px;
+            font-size: 1.2rem;
+            color: rgba(255, 255, 255, 0.9);
+            line-height: 2;
+        }
+
+        .signature strong {
+            color: var(--gold);
+            font-size: 1.3rem;
+            display: block;
+            margin-top: 20px;
+            text-shadow: 0 0 15px rgba(212, 175, 55, 0.6);
+        }
+
+        /* Responsive */
         @media (max-width: 768px) {
-            .header h1 { font-size: 1.8rem; }
-            .hero h2 { font-size: 2rem; }
-            .video-container iframe { height: 300px; }
+            .main-title h1 {
+                font-size: 2rem;
+            }
+
+            .section-title {
+                font-size: 1.8rem;
+            }
+
+            .video-wrapper iframe {
+                height: 400px;
+            }
+
+            .youtube-embed {
+                height: 300px;
+            }
+
+            .canva-embed {
+                height: 500px;
+            }
+
+            .glass-card {
+                padding: 25px;
+            }
         }
 
-        .fade-in {
-            animation: fadeIn 1s ease-in;
+        /* Scroll Animations */
+        .fade-in-up {
+            opacity: 0;
+            transform: translateY(50px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
         }
 
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(30px); }
-            to { opacity: 1; transform: translateY(0); }
+        .fade-in-up.visible {
+            opacity: 1;
+            transform: translateY(0);
         }
     </style>
 </head>
 <body>
-    <div class="header">
-        <h1>הדרכה מחוז ירושלים</h1>
+    <!-- Top Banner - Gold -->
+    <div class="top-banner">
+        <p>הדרכה מחוז ירושלים והעיר ירושלים מנח"י בהובלת איילת קריספין</p>
     </div>
 
-    <div class="hero">
-        <div class="stars" id="stars"></div>
-        <h2>המחשה ויזואלית של משפחות גיאומטריות</h2>
-        <div class="badge">מיזם המחוז</div>
+    <!-- Main Title -->
+    <div class="main-title">
+        <h1>מיזם גיאומטריה עם בינה מלאכותית</h1>
     </div>
 
-    <div class="video-container fade-in">
-        <iframe 
-            src="https://drive.google.com/file/d/1WhCxZHQ2DoARgKXFQSeTlG8NrNEa_ptz/preview" 
-            allow="autoplay"
-            allowfullscreen>
-        </iframe>
+    <!-- Hero Section with Video -->
+    <div class="hero-section fade-in-up">
+        <div class="video-wrapper">
+            <iframe 
+                src="https://drive.google.com/file/d/1WhCxZHQ2DoARgKXFQSeTlG8NrNEa_ptz/preview" 
+                allow="autoplay"
+                allowfullscreen>
+            </iframe>
+        </div>
+        <div class="sub-heading">המחשה ויזואלית של משפטים גיאומטריים</div>
     </div>
 
-    <div class="section fade-in">
-        <h3>מטרות המיזם</h3>
-        <p>יצירת המחשה ויזואלית חדשנית של משפחות גיאומטריות</p>
+    <!-- Background Section -->
+    <div class="glass-card fade-in-up">
+        <h2 class="section-title turquoise">רקע</h2>
+        <p class="content-text">
+            אנו שמחים להזמין אתכם, מנהלות ומנהלים, מורות ומורים, להשתתף במיזם חדשני המשלב מתמטיקה, יצירתיות ובינה מלאכותית. המיזם מציע לתלמידים הזדמנות ייחודית להמחיש משפטים גיאומטריים ותכונות של גופים ומצולעים באופן ויזואלי וסיפורי, תוך שימוש במחולל AI ליצירת תמונות.
+        </p>
     </div>
 
-    <div class="form-container fade-in">
-        <h3 style="text-align: center; margin-bottom: 20px; color: #FFD700;">טופס הרשמה</h3>
-        <iframe 
-            src="https://docs.google.com/forms/d/e/YOUR_FORM_ID/viewform?embedded=true" 
-            frameborder="0">
-            טוען טופס...
-        </iframe>
+    <!-- Project Goals -->
+    <div class="glass-card fade-in-up">
+        <h2 class="section-title gold">מטרות המיזם</h2>
+        <ul class="content-list">
+            <li>העמקת ההבנה של מושגים ומשפטים גיאומטריים</li>
+            <li>פיתוח חשיבה יצירתית וויזואלית</li>
+            <li>טיפוח מיומנויות שימוש בבינה מלאכותית</li>
+            <li>עידוד למידה חווייתית ושיתופית</li>
+            <li>חיזוק הקשר בין מתמטיקה לאמנות ויצירה</li>
+        </ul>
+    </div>
+
+    <!-- Student Journey -->
+    <div class="glass-card fade-in-up">
+        <h2 class="section-title">מיזם גיאומטריה עם בינה מלאכותית</h2>
+        <p class="content-text" style="margin-bottom: 30px;">
+            התלמידים יעבדו בקבוצות קטנות ליצירת חידות ויזואליות המבוססות על משפטים גיאומטריים:
+        </p>
+        <ol class="numbered-list">
+            <li>בחירת משפט גיאומטרי או תכונה של גוף/מצולע</li>
+            <li>המחשת המשפט באמצעות סיפור או תיאור ויזואלי יצירתי</li>
+            <li>שימוש במחולל AI ליצירת תמונה המבטאת את הרעיון</li>
+            <li>יצירת חידה שבה חבריהם יצטרכו לזהות את המשפט המתמטי המוצג בתמונה</li>
+        </ol>
+    </div>
+
+    <!-- Requirements -->
+    <div class="glass-card fade-in-up">
+        <h2 class="section-title turquoise">מה נדרש מכם?</h2>
+        <ul class="content-list">
+            <li>הנחיה וליווי של קבוצות תלמידים בתהליך היצירה</li>
+            <li>שיתוף פעולה בין מורי המתמטיקה, האמנות והתקשוב</li>
+            <li>הקצאת זמן ומשאבים בסיסיים</li>
+            <li>עידוד יצירתיות, חשיבה מחוץ לקופסה ודיוק מתמטי</li>
+        </ul>
+    </div>
+
+    <!-- What We Provide -->
+    <div class="glass-card fade-in-up">
+        <h2 class="section-title gold">מה אנחנו מספקים?</h2>
+        <ul class="content-list">
+            <li>רשימת משפטים גיאומטריים ותכונות מומלצות לפרויקט</li>
+            <li><strong>תבנית</strong> - <a href="https://docs.google.com/document/d/1lkcogRv7niBuHMy7o-eMwhhO5sPFrhTZdClvS9Z3BAU/edit?tab=t.0#heading=h.z7ojmydpuhps" target="_blank" class="premium-link">לחץ כאן לתבנית</a></li>
+            <li><strong>מחוון</strong> - <a href="https://docs.google.com/document/d/1AaDCrw4ZoA1jryi8LJnf1so5uX2FSGwl-jAIAcq9XLU/edit?tab=t.0" target="_blank" class="premium-link">לחץ כאן למחוון</a></li>
+            <li>פלטפורמה לשיתוף החידות והתמונות</li>
+            <li>תמיכה טכנית ומתמטית לאורך כל התהליך</li>
+        </ul>
+    </div>
+
+    <!-- Step-by-Step Guide -->
+    <div class="glass-card fade-in-up">
+        <h2 class="section-title turquoise">סדר הפעולות למעוניינים להשתתף</h2>
+        <p class="content-text" style="margin-bottom: 20px; font-size: 1rem; color: rgba(255, 255, 255, 0.7);">
+            מתאים לתלמידי כיתה ד' ומעלה, קישור למפגש בשעה 20:00, הזמנה למפגש
+        </p>
+        <ol class="numbered-list">
+            <li>הרשמה - נרשמים בטופס למיזם</li>
+            <li>מגבשים קבוצות עבודה של התלמידים, ובעזרת התבנית וחומרי העזר - מתכננים ומתחילים ליצור</li>
+            <li>נעזרים במחוון כדי לוודא שהחידה עומדת בדרישות</li>
+        </ol>
+    </div>
+
+    <!-- Timeline -->
+    <div class="glass-card fade-in-up">
+        <h2 class="section-title gold">לוח זמנים</h2>
+        <div class="timeline">
+            <div class="timeline-item">
+                <div class="timeline-date">הרשמה</div>
+                <div class="timeline-text">
+                    קישור לטופס הרשמה, הקלטת המפגש.
+                </div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-date">הגשת התוצרים: יום שישי, 27.2.26 י' אדר תשפ"ו</div>
+                <div class="timeline-text">
+                    <a href="#" target="_blank" class="premium-link">טופס הגשה לחידות</a><br>
+                    <em style="color: rgba(255, 255, 255, 0.7);">ניתן להגיש עד יום שישי, 27.2.26 י' אדר תשפ"ו בלבד</em>
+                </div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-date">אירוע סיכום ותערוכה וירטואלית: יום ראשון, 25.5.25</div>
+                <div class="timeline-text">
+                    הצגת התוצרים והחידות שיצרו התלמידים
+                </div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-date">כנס סיום מחוזי: יום שני, 25.5.26, ט' סיוון תשפ"ו</div>
+                <div class="timeline-text">
+                    אירוע סיכום חגיגי למיזם
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- YouTube Video -->
+    <div class="glass-card fade-in-up">
+        <h2 class="section-title turquoise">איך ליצור תמונה בקופיילוט?</h2>
+        <div class="media-container">
+            <iframe 
+                class="youtube-embed"
+                src="https://www.youtube.com/embed/NKSc_Hxglj0" 
+                frameborder="0" 
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                allowfullscreen>
+            </iframe>
+        </div>
+    </div>
+
+    <!-- Canva Presentation -->
+    <div class="glass-card fade-in-up">
+        <h2 class="section-title gold">תוצרי המיזם של בינה מלאכותית וגאומטריה בשנת תשפ"ה</h2>
+        <div class="media-container">
+            <iframe 
+                class="canva-embed"
+                src="https://www.canva.com/design/DAGnPGxY1s4/InaoNiHbbyUwr5E867EMzQ/view?embed" 
+                allowfullscreen="allowfullscreen" 
+                allow="fullscreen">
+            </iframe>
+        </div>
+    </div>
+
+    <!-- Call to Action -->
+    <div class="glass-card fade-in-up">
+        <h2 class="section-title">איך להצטרף?</h2>
+        <p class="content-text" style="text-align: center; margin-bottom: 30px;">
+            אם אתם מעוניינים להשתתף במיזם מרתק זה, אנא מלאו את טופס ההרשמה המקוון בקישור הבא:
+        </p>
+        <a href="https://docs.google.com/forms/d/e/1FAIpQLScJ-XzvhWsfuxlkoisuwkTvqUzhp8WkDKrErUtpoAjs4WwQzg/viewform" 
+           target="_blank" 
+           class="cta-button">
+            <span>לחצו כאן להרשמה למיזם</span>
+        </a>
+        <p class="content-text" style="text-align: center; margin-top: 30px; color: rgba(255, 255, 255, 0.8);">
+            לשאלות נוספות, אנא פנו אלינו.
+        </p>
+    </div>
+
+    <!-- Embedded Form -->
+    <div class="form-container fade-in-up">
+        <div class="glass-card">
+            <h2 class="section-title gold">טופס הרשמה</h2>
+            <iframe 
+                src="https://docs.google.com/forms/d/e/1FAIpQLScJ-XzvhWsfuxlkoisuwkTvqUzhp8WkDKrErUtpoAjs4WwQzg/viewform?embedded=true" 
+                frameborder="0">
+                טוען טופס...
+            </iframe>
+        </div>
+    </div>
+
+    <!-- Signature -->
+    <div class="signature fade-in-up">
+        <p>בציפייה לשיתוף פעולה מתמטי, יצירתי ומעשיר!</p>
+        <strong>בברכה,</strong>
+        <strong>מדריכות מתמטיקה ותקשוב מחוז ירושלים</strong>
     </div>
 
     <script>
-        function createStars() {
-            const starsContainer = document.getElementById('stars');
-            for (let i = 0; i < 50; i++) {
-                const star = document.createElement('div');
-                star.className = 'star';
-                star.style.left = Math.random() * 100 + '%';
-                star.style.top = Math.random() * 100 + '%';
-                star.style.animationDelay = Math.random() * 2 + 's';
-                starsContainer.appendChild(star);
+        // GSAP Scroll Animations
+        gsap.registerPlugin(ScrollTrigger);
+
+        // Fade in up animations
+        gsap.utils.toArray('.fade-in-up').forEach((element) => {
+            gsap.from(element, {
+                opacity: 0,
+                y: 50,
+                duration: 1,
+                ease: 'power3.out',
+                scrollTrigger: {
+                    trigger: element,
+                    start: 'top 85%',
+                    toggleActions: 'play none none reverse'
+                }
+            });
+        });
+
+        // Parallax effect for main title
+        gsap.to('.main-title h1', {
+            scrollTrigger: {
+                trigger: '.main-title',
+                start: 'top top',
+                end: 'bottom top',
+                scrub: true
+            },
+            scale: 0.8,
+            opacity: 0.5
+        });
+
+        // Floating animation for glass cards
+        gsap.utils.toArray('.glass-card').forEach((card, index) => {
+            gsap.to(card, {
+                y: -10,
+                duration: 2 + index * 0.3,
+                repeat: -1,
+                yoyo: true,
+                ease: 'power1.inOut',
+                delay: index * 0.2
+            });
+        });
+
+        // Gold particles effect
+        function createGoldParticles() {
+            const particlesContainer = document.createElement('div');
+            particlesContainer.style.cssText = `
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                pointer-events: none;
+                z-index: 1;
+            `;
+            document.body.appendChild(particlesContainer);
+
+            for (let i = 0; i < 30; i++) {
+                const particle = document.createElement('div');
+                particle.style.cssText = `
+                    position: absolute;
+                    width: 4px;
+                    height: 4px;
+                    background: #D4AF37;
+                    border-radius: 50%;
+                    box-shadow: 0 0 10px #D4AF37;
+                    opacity: 0.6;
+                `;
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.top = Math.random() * 100 + '%';
+                particlesContainer.appendChild(particle);
+
+                gsap.to(particle, {
+                    y: -100,
+                    x: Math.random() * 100 - 50,
+                    opacity: 0,
+                    duration: 3 + Math.random() * 2,
+                    repeat: -1,
+                    ease: 'none',
+                    delay: Math.random() * 2
+                });
             }
         }
-        window.addEventListener('DOMContentLoaded', createStars);
+
+        // Initialize on load
+        window.addEventListener('DOMContentLoaded', () => {
+            createGoldParticles();
+        });
     </script>
 </body>
 </html>
