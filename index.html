@@ -160,12 +160,80 @@
 
         .sub-heading {
             text-align: center;
-            font-size: 1.8rem;
-            font-weight: 700;
+            font-size: 2.8rem;
+            font-weight: 900;
             color: var(--turquoise);
-            text-shadow: 0 0 20px rgba(64, 224, 208, 0.6);
-            margin: 30px 0;
-            padding: 20px;
+            text-shadow: 
+                0 0 30px rgba(64, 224, 208, 0.9),
+                0 0 60px rgba(64, 224, 208, 0.7),
+                0 0 90px rgba(64, 224, 208, 0.5),
+                0 0 120px rgba(64, 224, 208, 0.3);
+            margin: 40px 0;
+            padding: 30px;
+            background: linear-gradient(135deg, rgba(64, 224, 208, 0.1) 0%, rgba(212, 175, 55, 0.1) 100%);
+            border-radius: 20px;
+            border: 2px solid rgba(64, 224, 208, 0.4);
+            box-shadow: 
+                0 0 40px rgba(64, 224, 208, 0.4),
+                inset 0 0 30px rgba(64, 224, 208, 0.1);
+            animation: subHeadingGlow 3s ease-in-out infinite alternate;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .sub-heading::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(64, 224, 208, 0.2) 0%, transparent 70%);
+            animation: rotateGlow 8s linear infinite;
+        }
+
+        .sub-heading::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, transparent 0%, rgba(212, 175, 55, 0.1) 50%, transparent 100%);
+            animation: shimmer 3s ease-in-out infinite;
+        }
+
+        @keyframes subHeadingGlow {
+            0% {
+                text-shadow: 
+                    0 0 30px rgba(64, 224, 208, 0.9),
+                    0 0 60px rgba(64, 224, 208, 0.7),
+                    0 0 90px rgba(64, 224, 208, 0.5),
+                    0 0 120px rgba(64, 224, 208, 0.3);
+                box-shadow: 
+                    0 0 40px rgba(64, 224, 208, 0.4),
+                    inset 0 0 30px rgba(64, 224, 208, 0.1);
+            }
+            100% {
+                text-shadow: 
+                    0 0 50px rgba(64, 224, 208, 1),
+                    0 0 100px rgba(64, 224, 208, 0.9),
+                    0 0 150px rgba(64, 224, 208, 0.7),
+                    0 0 200px rgba(64, 224, 208, 0.5);
+                box-shadow: 
+                    0 0 60px rgba(64, 224, 208, 0.6),
+                    inset 0 0 50px rgba(64, 224, 208, 0.2);
+            }
+        }
+
+        @keyframes rotateGlow {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        @keyframes shimmer {
+            0%, 100% { opacity: 0; }
+            50% { opacity: 1; }
         }
 
         /* Glassmorphism Cards */
