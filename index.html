@@ -322,12 +322,16 @@
         }
 
         /* What We Provide Section - Gold & Orange Gradient */
-        .glass-card:has(.section-title.gold:contains("מה אנחנו מספקים")) {
+        .glass-card.provides {
             background: linear-gradient(135deg, 
                 rgba(212, 175, 55, 0.2) 0%, 
                 rgba(255, 165, 0, 0.15) 50%,
                 rgba(255, 140, 0, 0.12) 100%);
             border-color: rgba(255, 215, 0, 0.5);
+        }
+
+        .glass-card.provides::before {
+            background: radial-gradient(circle at 50% 50%, rgba(255, 215, 0, 0.2) 0%, transparent 50%);
         }
 
         /* Timeline Section - Gold & Turquoise Gradient */
