@@ -348,7 +348,7 @@
         }
 
         /* YouTube Section - Red & Orange Gradient */
-        .glass-card:has(.section-title.turquoise:contains("איך ליצור")) {
+        .glass-card.youtube-section {
             background: linear-gradient(135deg, 
                 rgba(220, 20, 60, 0.15) 0%, 
                 rgba(255, 69, 0, 0.12) 50%,
@@ -356,8 +356,12 @@
             border-color: rgba(220, 20, 60, 0.4);
         }
 
+        .glass-card.youtube-section::before {
+            background: radial-gradient(circle at 30% 70%, rgba(220, 20, 60, 0.2) 0%, transparent 50%);
+        }
+
         /* Canva Section - Purple & Pink Gradient */
-        .glass-card:has(.section-title.gold:contains("תוצרי המיזם")) {
+        .glass-card.canva-section {
             background: linear-gradient(135deg, 
                 rgba(138, 43, 226, 0.16) 0%, 
                 rgba(255, 20, 147, 0.14) 50%,
@@ -365,13 +369,21 @@
             border-color: rgba(138, 43, 226, 0.4);
         }
 
+        .glass-card.canva-section::before {
+            background: radial-gradient(circle at 70% 30%, rgba(138, 43, 226, 0.2) 0%, transparent 50%);
+        }
+
         /* CTA Section - Gold & White Gradient */
-        .glass-card:has(.section-title:contains("איך להצטרף")) {
+        .glass-card.cta-section {
             background: linear-gradient(135deg, 
                 rgba(212, 175, 55, 0.2) 0%, 
                 rgba(255, 255, 255, 0.1) 50%,
                 rgba(212, 175, 55, 0.15) 100%);
             border-color: rgba(212, 175, 55, 0.5);
+        }
+
+        .glass-card.cta-section::before {
+            background: radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.15) 0%, transparent 50%);
         }
 
         /* Form Container - Blue & Gold Gradient */
