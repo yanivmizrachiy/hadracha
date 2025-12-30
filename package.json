@@ -1,0 +1,19 @@
+{
+  "name": "hadracha",
+  "version": "1.0.0",
+  "description": "אתר הדרכה מחוז ירושלים",
+  "type": "module",
+  "scripts": {
+    "dev": "vite --host --port 3000",
+    "build": "vite build",
+    "preview": "vite preview --host --port 3000",
+    "sync": "node sync.js",
+    "watch": "node watch.js",
+    "start": "npm run dev & npm run watch"
+  },
+  "devDependencies": {
+    "vite": "^5.0.0",
+    "chokidar": "^3.5.3"
+  }
+}
+
