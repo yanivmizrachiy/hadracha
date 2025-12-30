@@ -1359,7 +1359,157 @@
         // Initialize on load
         window.addEventListener('DOMContentLoaded', () => {
             createGoldParticles();
+            initSmartNavigation();
         });
+
+        // Smart Navigation System
+        function initSmartNavigation() {
+            const nav = document.getElementById('smartNav');
+            const scrollToTopBtn = document.getElementById('scrollToTop');
+            const navLinks = document.querySelectorAll('.nav-link');
+            const sections = document.querySelectorAll('.section-anchor');
+
+            // Smooth scroll for navigation links
+            navLinks.forEach(link => {
+                link.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    const targetId = link.getAttribute('href');
+                    const targetSection = document.querySelector(targetId);
+                    
+                    if (targetSection) {
+                        // Premium smooth scroll animation
+                        if (typeof gsap !== 'undefined') {
+                            gsap.to(window, {
+                                duration: 1.2,
+                                scrollTo: {
+                                    y: targetSection,
+                                    offsetY: 100
+                                },
+                                ease: 'power3.inOut'
+                            });
+                        } else {
+                            // Fallback smooth scroll
+                            targetSection.scrollIntoView({
+                                behavior: 'smooth',
+                                block: 'start'
+                            });
+                        }
+
+                        // Update active link
+                        navLinks.forEach(l => l.classList.remove('active'));
+                        link.classList.add('active');
+
+                        // Animate link click
+                        if (typeof gsap !== 'undefined') {
+                            gsap.fromTo(link, 
+                                { scale: 1 },
+                                { scale: 0.95, duration: 0.1, yoyo: true, repeat: 1 }
+                            );
+                        }
+                    }
+                });
+            });
+
+            // Scroll to top button
+            scrollToTopBtn.addEventListener('click', () => {
+                if (typeof gsap !== 'undefined') {
+                    gsap.to(window, {
+                        duration: 1,
+                        scrollTo: { y: 0 },
+                        ease: 'power2.inOut'
+                    });
+                } else {
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                }
+            });
+
+            // Show/hide scroll to top button
+            let lastScroll = 0;
+            window.addEventListener('scroll', () => {
+                const currentScroll = window.pageYOffset || document.documentElement.scrollTop;
+
+                // Navbar scroll effect
+                if (currentScroll > 100) {
+                    nav.classList.add('scrolled');
+                } else {
+                    nav.classList.remove('scrolled');
+                }
+
+                // Scroll to top button
+                if (currentScroll > 500) {
+                    scrollToTopBtn.classList.add('visible');
+                    if (typeof gsap !== 'undefined') {
+                        gsap.to(scrollToTopBtn, {
+                            opacity: 1,
+                            scale: 1,
+                            duration: 0.3
+                        });
+                    }
+                } else {
+                    scrollToTopBtn.classList.remove('visible');
+                    if (typeof gsap !== 'undefined') {
+                        gsap.to(scrollToTopBtn, {
+                            opacity: 0,
+                            scale: 0.8,
+                            duration: 0.3
+                        });
+                    }
+                }
+
+                // Update active navigation link based on scroll position
+                let current = '';
+                sections.forEach(section => {
+                    const sectionTop = section.offsetTop;
+                    const sectionHeight = section.clientHeight;
+                    if (currentScroll >= sectionTop - 150) {
+                        current = section.getAttribute('id');
+                    }
+                });
+
+                navLinks.forEach(link => {
+                    link.classList.remove('active');
+                    if (link.getAttribute('href') === '#' + current) {
+                        link.classList.add('active');
+                    }
+                });
+
+                lastScroll = currentScroll;
+            });
+
+            // Premium entrance animation for nav
+            if (typeof gsap !== 'undefined') {
+                gsap.from(nav, {
+                    y: -100,
+                    opacity: 0,
+                    duration: 0.8,
+                    ease: 'power3.out',
+                    delay: 0.2
+                });
+
+                // Stagger animation for nav links
+                gsap.from(navLinks, {
+                    opacity: 0,
+                    y: -20,
+                    duration: 0.6,
+                    stagger: 0.1,
+                    ease: 'power2.out',
+                    delay: 0.5
+                });
+            }
+        }
+
+        // Add smooth scroll polyfill if GSAP ScrollToPlugin is not available
+        if (typeof gsap !== 'undefined' && typeof ScrollToPlugin === 'undefined') {
+            // Load ScrollToPlugin
+            const script = document.createElement('script');
+            script.src = 'https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollToPlugin.min.js';
+            script.onload = () => {
+                if (typeof ScrollToPlugin !== 'undefined') {
+                    gsap.registerPlugin(ScrollToPlugin);
+                }
+            };
+            document.head.appendChild(script);
+        }
     </script>
-  </body>
+</body>
 </html>
