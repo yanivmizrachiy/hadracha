@@ -708,11 +708,9 @@
             try {
                 // GSAP Scroll Animations
                 gsap.registerPlugin(ScrollTrigger);
-
-                // Mark elements as ready for GSAP animation
-                document.querySelectorAll('.fade-in-up').forEach(el => {
-                    el.classList.add('gsap-ready');
-                });
+                
+                // Mark body as GSAP loaded
+                document.body.classList.add('gsap-loaded');
 
                 // Fade in up animations
                 gsap.utils.toArray('.fade-in-up').forEach((element) => {
@@ -724,7 +722,8 @@
                         scrollTrigger: {
                             trigger: element,
                             start: 'top 85%',
-                            toggleActions: 'play none none reverse'
+                            toggleActions: 'play none none reverse',
+                            onEnter: () => element.classList.add('animated')
                         }
                     });
                 });
