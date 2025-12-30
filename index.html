@@ -759,17 +759,23 @@
             });
         }
 
-        // Parallax effect for main title
-        gsap.to('.main-title h1', {
-            scrollTrigger: {
-                trigger: '.main-title',
-                start: 'top top',
-                end: 'bottom top',
-                scrub: true
-            },
-            scale: 0.8,
-            opacity: 0.5
-        });
+        // Parallax effect for main title (only if GSAP loaded)
+        if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
+            try {
+                gsap.to('.main-title h1', {
+                    scrollTrigger: {
+                        trigger: '.main-title',
+                        start: 'top top',
+                        end: 'bottom top',
+                        scrub: true
+                    },
+                    scale: 0.8,
+                    opacity: 0.5
+                });
+            } catch (e) {
+                console.warn('Parallax effect failed:', e);
+            }
+        }
 
         // Floating animation for glass cards
         gsap.utils.toArray('.glass-card').forEach((card, index) => {
