@@ -738,8 +738,13 @@
             /* Lists - Mobile */
             .content-list li {
                 font-size: 1rem;
-                padding: 12px 0 12px 40px;
+                padding: 12px 40px 12px 0;
                 line-height: 1.7;
+            }
+
+            .content-list li::before {
+                right: 10px;
+                font-size: 1.1rem;
             }
 
             .numbered-list li {
