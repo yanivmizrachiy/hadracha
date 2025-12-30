@@ -486,9 +486,15 @@
 
         /* Scroll Animations */
         .fade-in-up {
+            opacity: 1;
+            transform: translateY(0);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+
+        /* Only hide if GSAP is loaded and working */
+        .fade-in-up.gsap-ready {
             opacity: 0;
             transform: translateY(50px);
-            transition: opacity 0.8s ease, transform 0.8s ease;
         }
 
         .fade-in-up.visible {
