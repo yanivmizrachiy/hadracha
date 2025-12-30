@@ -484,17 +484,22 @@
             }
         }
 
-        /* Scroll Animations */
+        /* Scroll Animations - Content visible by default */
         .fade-in-up {
-            opacity: 1;
-            transform: translateY(0);
+            opacity: 1 !important;
+            transform: translateY(0) !important;
             transition: opacity 0.8s ease, transform 0.8s ease;
         }
 
-        /* Only hide if GSAP is loaded and working */
-        .fade-in-up.gsap-ready {
+        /* Only animate if GSAP is loaded and working */
+        body.gsap-loaded .fade-in-up {
             opacity: 0;
             transform: translateY(50px);
+        }
+
+        body.gsap-loaded .fade-in-up.animated {
+            opacity: 1 !important;
+            transform: translateY(0) !important;
         }
 
         .fade-in-up.visible {
