@@ -1138,6 +1138,49 @@
             z-index: 1;
         }
 
+        /* GitHub Link Button */
+        .github-link-button {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 15px 25px;
+            background: linear-gradient(135deg, #24292e 0%, #1a1e22 100%);
+            color: #ffffff;
+            text-decoration: none;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: 700;
+            box-shadow: 
+                0 8px 30px rgba(36, 41, 46, 0.5),
+                0 0 20px rgba(36, 41, 46, 0.3),
+                inset 0 2px 0 rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+            z-index: 9999;
+            border: 2px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .github-link-button:hover {
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 
+                0 12px 40px rgba(36, 41, 46, 0.7),
+                0 0 30px rgba(36, 41, 46, 0.5),
+                inset 0 2px 0 rgba(255, 255, 255, 0.2);
+            background: linear-gradient(135deg, #2f363d 0%, #24292e 100%);
+        }
+
+        .github-link-button svg {
+            width: 24px;
+            height: 24px;
+            flex-shrink: 0;
+        }
+
+        .github-link-button span {
+            white-space: nowrap;
+        }
+
         /* Scroll to Top Button */
         .scroll-to-top {
             position: fixed;
