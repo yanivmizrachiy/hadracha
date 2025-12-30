@@ -244,7 +244,7 @@
         }
 
         .content-list li {
-            padding: 15px 0 15px 50px;
+            padding: 15px 50px 15px 0;
             position: relative;
             font-size: 1.1rem;
             line-height: 1.9;
@@ -259,9 +259,12 @@
         .content-list li::before {
             content: '✨';
             position: absolute;
-            right: 0;
-            font-size: 1.5rem;
+            right: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 1.3rem;
             animation: iconFloat 2s ease-in-out infinite;
+            line-height: 1;
         }
 
         @keyframes iconFloat {
