@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes" />
+    <title>לוח זמנים - הדרכה מחוז ירושלים</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Assistant:wght@300;400;700;900&family=Heebo:wght@300;400;700;900&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --premium-blue: #001B3D;
+            --gold: #D4AF37;
+            --turquoise: #40E0D0;
+            --white: #FFFFFF;
+        }
+
+        body {
+            font-family: 'Assistant', 'Heebo', sans-serif;
+            direction: rtl;
+            text-align: right;
+            background: var(--premium-blue);
+            background-image: 
+                radial-gradient(circle at 20% 50%, rgba(212, 175, 55, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(64, 224, 208, 0.1) 0%, transparent 50%);
+            color: var(--white);
+            line-height: 1.8;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            min-height: 100vh;
+        }
+
+        /* Navigation Header */
+        .nav-header {
+            background: rgba(0, 27, 61, 0.95);
+            backdrop-filter: blur(20px);
+            border-bottom: 2px solid rgba(212, 175, 55, 0.3);
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
+            padding: 20px;
+            position: sticky;
+            top: 0;
+            z-index: 10000;
+        }
+
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .page-title {
+            font-size: 1.8rem;
+            font-weight: 900;
+            color: var(--gold);
+            text-shadow: 0 0 20px rgba(212, 175, 55, 0.8);
+        }
+
+        /* Back Button - 3D Premium */
+        .back-button {
+            display: inline-block;
+            position: relative;
+            padding: 15px 40px;
+            background: linear-gradient(135deg, 
+                rgba(212, 175, 55, 0.9) 0%, 
+                rgba(255, 215, 0, 0.9) 100%);
+            color: var(--premium-blue);
+            font-size: 1.2rem;
+            font-weight: 900;
+            text-decoration: none;
+            border-radius: 12px;
+            box-shadow: 
+                0 8px 30px rgba(212, 175, 55, 0.4),
+                0 0 20px rgba(212, 175, 55, 0.3),
+                inset 0 2px 0 rgba(255, 255, 255, 0.3),
+                inset 0 -2px 0 rgba(0, 0, 0, 0.2);
+            transition: all 0.3s ease;
+            overflow: hidden;
+            transform-style: preserve-3d;
+        }
+
+        .back-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, 
+                transparent, 
+                rgba(255, 255, 255, 0.3), 
+                transparent);
+            transition: left 0.5s ease;
+        }
+
+        .back-button:hover::before {
+            left: 100%;
+        }
+
+        .back-button:hover {
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 
+                0 12px 40px rgba(212, 175, 55, 0.6),
+                0 0 30px rgba(212, 175, 55, 0.5),
+                inset 0 2px 0 rgba(255, 255, 255, 0.4);
+        }
+
+        .back-button:active {
+            transform: translateY(-2px) scale(1.02);
+        }
+
+        /* Content Container */
+        .content-container {
+            max-width: 1200px;
+            margin: 40px auto;
+            padding: 20px;
+        }
+
+        .glass-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(20px);
+            border-radius: 20px;
+            border: 2px solid rgba(212, 175, 55, 0.3);
+            box-shadow: 
+                0 10px 40px rgba(0, 0, 0, 0.4),
+                0 0 30px rgba(212, 175, 55, 0.2);
+            padding: 40px;
+            margin-bottom: 30px;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: 900;
+            color: var(--gold);
+            text-shadow: 
+                0 0 20px rgba(212, 175, 55, 0.8),
+                0 0 40px rgba(212, 175, 55, 0.6);
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        /* Timeline */
+        .timeline {
+            position: relative;
+            padding: 40px 0;
+        }
+
+        .timeline-item {
+            position: relative;
+            padding: 30px 30px 30px 80px;
+            margin-bottom: 30px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
+            border-right: 4px solid var(--gold);
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .timeline-item:hover {
+            background: rgba(255, 255, 255, 0.08);
+            transform: translateX(-5px);
+            box-shadow: 0 8px 30px rgba(212, 175, 55, 0.4);
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            right: -12px;
+            top: 30px;
+            width: 20px;
+            height: 20px;
+            background: var(--gold);
+            border-radius: 50%;
+            box-shadow: 0 0 20px var(--gold);
+            border: 3px solid var(--premium-blue);
+        }
+
+        .timeline-event-title {
+            font-size: 1.4rem;
+            font-weight: 900;
+            color: var(--white);
+            margin-bottom: 12px;
+            text-shadow: 0 0 20px rgba(255, 255, 255, 0.5);
+        }
+
+        .timeline-date-wrapper {
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 15px;
+            line-height: 1.6;
+        }
+
+        .timeline-date-hebrew {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--gold);
+            text-shadow: 0 0 15px rgba(212, 175, 55, 0.6);
+        }
+
+        .timeline-date-gregorian {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--turquoise);
+            text-shadow: 0 0 10px rgba(64, 224, 208, 0.4);
+        }
+
+        .timeline-day {
+            font-size: 1rem;
+            font-weight: 500;
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        .timeline-date-separator {
+            color: rgba(255, 255, 255, 0.5);
+            margin: 0 5px;
+        }
+
+        .timeline-text {
+            font-size: 1.1rem;
+            color: rgba(255, 255, 255, 0.85);
+            line-height: 1.8;
+            margin-top: 10px;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-container {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .page-title {
+                font-size: 1.4rem;
+                text-align: center;
+            }
+
+            .back-button {
+                width: 100%;
+                text-align: center;
+            }
+
+            .content-container {
+                padding: 15px;
+                margin: 20px auto;
+            }
+
+            .glass-card {
+                padding: 25px 20px;
+            }
+
+            .section-title {
+                font-size: 1.8rem;
+                margin-bottom: 20px;
+            }
+
+            .timeline-item {
+                padding: 20px 20px 20px 60px;
+                margin-bottom: 20px;
+            }
+
+            .timeline-event-title {
+                font-size: 1.2rem;
+                margin-bottom: 10px;
+            }
+
+            .timeline-date-wrapper {
+                gap: 8px;
+                margin-bottom: 12px;
+                flex-wrap: wrap;
+            }
+
+            .timeline-date-separator {
+                margin: 0 3px;
+            }
+
+            .timeline-date-hebrew {
+                font-size: 1.1rem;
+            }
+
+            .timeline-date-gregorian {
+                font-size: 1rem;
+            }
+
+            .timeline-day {
+                font-size: 0.95rem;
+            }
+
+            .timeline-text {
+                font-size: 1rem;
+                line-height: 1.9;
+                color: rgba(255, 255, 255, 0.95);
+            }
+        }
+
+        @media (max-width: 480px) {
+            .section-title {
+                font-size: 1.5rem;
+            }
+
+            .timeline-item {
+                padding: 15px 15px 15px 50px;
+            }
+
+            .timeline-event-title {
+                font-size: 1.1rem;
+            }
+
+            .timeline-date-hebrew {
+                font-size: 1rem;
+            }
+
+            .timeline-date-gregorian {
+                font-size: 0.95rem;
+            }
+
+            .timeline-text {
+                font-size: 0.95rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation Header -->
+    <div class="nav-header">
+        <div class="nav-container">
+            <h1 class="page-title">לוח זמנים</h1>
+            <a href="index.html" class="back-button">
+                ← חזרה לעמוד הראשי
+            </a>
+        </div>
+    </div>
+
+    <!-- Content Container -->
+    <div class="content-container">
+        <div class="glass-card">
+            <h2 class="section-title">לוח זמנים</h2>
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-event-title">הגשת התוצרים</div>
+                    <div class="timeline-date-wrapper">
+                        <span class="timeline-day">יום שישי</span>
+                        <span class="timeline-date-separator">|</span>
+                        <span class="timeline-date-hebrew">י' אדר תשפ"ו</span>
+                        <span class="timeline-date-separator">|</span>
+                        <span class="timeline-date-gregorian">27.2.2026</span>
+                    </div>
+                    <div class="timeline-text">
+                        <em style="color: rgba(255, 255, 255, 0.9); font-size: 1.05rem;">ניתן להגיש עד תאריך זה בלבד</em>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-event-title">אירוע סיכום ותערוכה וירטואלית</div>
+                    <div class="timeline-date-wrapper">
+                        <span class="timeline-day">יום ראשון</span>
+                        <span class="timeline-date-separator">|</span>
+                        <span class="timeline-date-hebrew">כ"ו אייר תשפ"ו</span>
+                        <span class="timeline-date-separator">|</span>
+                        <span class="timeline-date-gregorian">25.5.2025</span>
+                    </div>
+                    <div class="timeline-text">
+                        הצגת התוצרים והחידות שיצרו התלמידים בתערוכה וירטואלית מרשימה
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-event-title">כנס סיום מחוזי</div>
+                    <div class="timeline-date-wrapper">
+                        <span class="timeline-day">יום שני</span>
+                        <span class="timeline-date-separator">|</span>
+                        <span class="timeline-date-hebrew">ט' סיוון תשפ"ו</span>
+                        <span class="timeline-date-separator">|</span>
+                        <span class="timeline-date-gregorian">25.5.2026</span>
+                    </div>
+                    <div class="timeline-text">
+                        אירוע סיכום חגיגי למיזם עם הצגת כל התוצרים והחידות הגיאומטריות
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+

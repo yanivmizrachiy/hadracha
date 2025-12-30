@@ -156,6 +156,109 @@
             height: 650px;
             border: none;
             display: block;
+            opacity: 0;
+            transition: opacity 0.5s ease-in-out;
+        }
+        
+        .video-wrapper iframe.loaded {
+            opacity: 1;
+        }
+        
+        .video-placeholder {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, rgba(0, 27, 61, 0.95) 0%, rgba(10, 26, 46, 0.95) 100%);
+            backdrop-filter: blur(10px);
+            z-index: 1;
+            transition: opacity 0.5s ease-in-out;
+        }
+        
+        .video-placeholder.hidden {
+            opacity: 0;
+            pointer-events: none;
+        }
+        
+        .video-placeholder-icon {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, rgba(212, 175, 55, 0.3) 0%, rgba(64, 224, 208, 0.3) 100%);
+            border: 4px solid rgba(212, 175, 55, 0.6);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 30px;
+            animation: placeholderPulse 2s ease-in-out infinite;
+            box-shadow: 
+                0 0 40px rgba(212, 175, 55, 0.5),
+                0 0 80px rgba(64, 224, 208, 0.3);
+        }
+        
+        .video-placeholder-icon::before {
+            content: '▶';
+            font-size: 4rem;
+            color: var(--white);
+            text-shadow: 
+                0 0 20px rgba(255, 255, 255, 0.8),
+                0 0 40px rgba(212, 175, 55, 0.6);
+            margin-right: 8px; /* RTL adjustment */
+        }
+        
+        .video-placeholder-text {
+            color: var(--white);
+            font-size: 1.5rem;
+            font-weight: 700;
+            text-align: center;
+            text-shadow: 
+                0 0 20px rgba(255, 255, 255, 0.6),
+                0 0 40px rgba(64, 224, 208, 0.4);
+            margin-bottom: 15px;
+        }
+        
+        .video-placeholder-loading {
+            color: var(--turquoise);
+            font-size: 1rem;
+            font-weight: 400;
+            text-align: center;
+            opacity: 0.8;
+        }
+        
+        .video-loading-spinner {
+            width: 50px;
+            height: 50px;
+            border: 4px solid rgba(212, 175, 55, 0.3);
+            border-top: 4px solid var(--gold);
+            border-right: 4px solid var(--turquoise);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin: 20px auto;
+        }
+        
+        @keyframes placeholderPulse {
+            0%, 100% {
+                transform: scale(1);
+                box-shadow: 
+                    0 0 40px rgba(212, 175, 55, 0.5),
+                    0 0 80px rgba(64, 224, 208, 0.3);
+            }
+            50% {
+                transform: scale(1.05);
+                box-shadow: 
+                    0 0 60px rgba(212, 175, 55, 0.7),
+                    0 0 100px rgba(64, 224, 208, 0.5);
+            }
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
         }
 
         .sub-heading {
@@ -1217,8 +1320,34 @@
             }
 
             .video-wrapper iframe {
-                height: 250px;
+                height: auto;
                 min-height: 250px;
+                aspect-ratio: 16 / 9;
+            }
+            
+            .video-placeholder-icon {
+                width: 80px;
+                height: 80px;
+                margin-bottom: 20px;
+            }
+            
+            .video-placeholder-icon::before {
+                font-size: 2.5rem;
+            }
+            
+            .video-placeholder-text {
+                font-size: 1.2rem;
+                margin-bottom: 10px;
+            }
+            
+            .video-loading-spinner {
+                width: 40px;
+                height: 40px;
+                margin: 15px auto;
+            }
+            
+            .video-placeholder-loading {
+                font-size: 0.9rem;
             }
 
             /* Glass Cards - Mobile */
@@ -1441,8 +1570,34 @@
 
             .video-wrapper iframe,
             .youtube-embed {
-                height: 200px;
+                height: auto;
                 min-height: 200px;
+                aspect-ratio: 16 / 9;
+            }
+            
+            .video-placeholder-icon {
+                width: 70px;
+                height: 70px;
+                margin-bottom: 15px;
+            }
+            
+            .video-placeholder-icon::before {
+                font-size: 2rem;
+            }
+            
+            .video-placeholder-text {
+                font-size: 1rem;
+                margin-bottom: 8px;
+            }
+            
+            .video-loading-spinner {
+                width: 35px;
+                height: 35px;
+                margin: 12px auto;
+            }
+            
+            .video-placeholder-loading {
+                font-size: 0.8rem;
             }
 
             .canva-embed {
@@ -1527,7 +1682,34 @@
 
             .video-wrapper iframe,
             .youtube-embed {
-                height: 180px;
+                height: auto;
+                min-height: 180px;
+                aspect-ratio: 16 / 9;
+            }
+            
+            .video-placeholder-icon {
+                width: 60px;
+                height: 60px;
+                margin-bottom: 12px;
+            }
+            
+            .video-placeholder-icon::before {
+                font-size: 1.8rem;
+            }
+            
+            .video-placeholder-text {
+                font-size: 0.9rem;
+                margin-bottom: 6px;
+            }
+            
+            .video-loading-spinner {
+                width: 30px;
+                height: 30px;
+                margin: 10px auto;
+            }
+            
+            .video-placeholder-loading {
+                font-size: 0.75rem;
             }
 
             .canva-embed {
@@ -1574,7 +1756,7 @@
                 <li class="nav-item"><a href="#goals" class="nav-link"><span>מטרות</span></a></li>
                 <li class="nav-item"><a href="#journey" class="nav-link"><span>פעולות תלמידים</span></a></li>
                 <li class="nav-item"><a href="#requirements" class="nav-link"><span>מה נדרש</span></a></li>
-                <li class="nav-item"><a href="#timeline" class="nav-link"><span>לוח זמנים</span></a></li>
+                <li class="nav-item"><a href="timeline.html" class="nav-link"><span>לוח זמנים</span></a></li>
                 <li class="nav-item"><a href="#register" class="nav-link"><span>הרשמה</span></a></li>
             </ul>
         </div>
@@ -1593,12 +1775,18 @@
     <!-- Hero Section with Video -->
     <div class="hero-section fade-in-up section-anchor" id="hero">
         <div class="video-wrapper">
+            <div class="video-placeholder" id="videoPlaceholder">
+                <div class="video-placeholder-icon"></div>
+                <div class="video-placeholder-text">הסרטון נטען...</div>
+                <div class="video-loading-spinner"></div>
+                <div class="video-placeholder-loading">לחץ על הסרטון כדי להתחיל</div>
+            </div>
             <iframe 
+                id="mainVideo"
                 src="https://drive.google.com/file/d/1WhCxZHQ2DoARgKXFQSeTlG8NrNEa_ptz/preview" 
                 allow="autoplay"
                 allowfullscreen
-                loading="lazy"
-                style="min-height: 650px;">
+                loading="lazy">
             </iframe>
         </div>
         <div class="sub-heading">המחשה ויזואלית של משפטים גיאומטריים</div>
@@ -1652,13 +1840,14 @@
     <!-- What We Provide -->
     <div class="glass-card fade-in-up provides">
         <h2 class="section-title gold">מה אנחנו מספקים?</h2>
-        <ul class="content-list">
-            <li>רשימת משפטים גיאומטריים ותכונות מומלצות לפרויקט</li>
-            <li><strong>תבנית מובנית לתכנון החידה הוויזואלית</strong> - <a href="template.html" class="premium-link">לחץ כאן לתבנית</a></li>
-            <li><strong>מחוון להערכת התוצרים, כולל היבטי יצירתיות ודיוק מתמטי</strong> - <a href="rubric.html" class="premium-link">לחץ כאן למחוון</a></li>
-            <li>פלטפורמה לשיתוף החידות והתמונות</li>
-            <li>תמיכה טכנית ומתמטית לאורך כל התהליך</li>
-        </ul>
+        <div style="text-align: center; margin: 40px auto; position: relative;">
+            <a href="what-we-provide.html" class="database-button">
+                <div class="click-indicator">לחץ כאן</div>
+                <span class="button-text">מה אנחנו מספקים?</span>
+                <span class="button-enter">ENTER</span>
+                <span class="button-shine"></span>
+            </a>
+        </div>
     </div>
 
     <!-- Database Button Section -->
@@ -1675,46 +1864,13 @@
     <!-- Timeline -->
     <div class="glass-card fade-in-up section-anchor" id="timeline">
         <h2 class="section-title gold">לוח זמנים</h2>
-        <div class="timeline">
-            <div class="timeline-item">
-                <div class="timeline-event-title">הגשת התוצרים</div>
-                <div class="timeline-date-wrapper">
-                    <span class="timeline-day">יום שישי</span>
-                    <span class="timeline-date-separator">|</span>
-                    <span class="timeline-date-hebrew">י' אדר תשפ"ו</span>
-                    <span class="timeline-date-separator">|</span>
-                    <span class="timeline-date-gregorian">27.2.2026</span>
-                </div>
-                <div class="timeline-text">
-                    <em style="color: rgba(255, 255, 255, 0.9); font-size: 1.05rem;">ניתן להגיש עד תאריך זה בלבד</em>
-                </div>
-            </div>
-            <div class="timeline-item">
-                <div class="timeline-event-title">אירוע סיכום ותערוכה וירטואלית</div>
-                <div class="timeline-date-wrapper">
-                    <span class="timeline-day">יום ראשון</span>
-                    <span class="timeline-date-separator">|</span>
-                    <span class="timeline-date-hebrew">כ"ו אייר תשפ"ו</span>
-                    <span class="timeline-date-separator">|</span>
-                    <span class="timeline-date-gregorian">25.5.2025</span>
-                </div>
-                <div class="timeline-text">
-                    הצגת התוצרים והחידות שיצרו התלמידים בתערוכה וירטואלית מרשימה
-                </div>
-            </div>
-            <div class="timeline-item">
-                <div class="timeline-event-title">כנס סיום מחוזי</div>
-                <div class="timeline-date-wrapper">
-                    <span class="timeline-day">יום שני</span>
-                    <span class="timeline-date-separator">|</span>
-                    <span class="timeline-date-hebrew">ט' סיוון תשפ"ו</span>
-                    <span class="timeline-date-separator">|</span>
-                    <span class="timeline-date-gregorian">25.5.2026</span>
-                </div>
-                <div class="timeline-text">
-                    אירוע סיכום חגיגי למיזם עם הצגת כל התוצרים והחידות הגיאומטריות
-                </div>
-            </div>
+        <div style="text-align: center; margin: 40px auto; position: relative;">
+            <a href="timeline.html" class="database-button">
+                <div class="click-indicator">לחץ כאן</div>
+                <span class="button-text">לוח זמנים</span>
+                <span class="button-enter">ENTER</span>
+                <span class="button-shine"></span>
+            </a>
         </div>
     </div>
 
@@ -1949,7 +2105,38 @@
         window.addEventListener('DOMContentLoaded', () => {
             createGoldParticles();
             initSmartNavigation();
+            initVideoPlaceholder();
         });
+        
+        // Video Placeholder Handler
+        function initVideoPlaceholder() {
+            const videoIframe = document.getElementById('mainVideo');
+            const placeholder = document.getElementById('videoPlaceholder');
+            
+            if (!videoIframe || !placeholder) return;
+            
+            // Hide placeholder when video loads
+            videoIframe.addEventListener('load', () => {
+                setTimeout(() => {
+                    videoIframe.classList.add('loaded');
+                    placeholder.classList.add('hidden');
+                    setTimeout(() => {
+                        placeholder.style.display = 'none';
+                    }, 500);
+                }, 500);
+            });
+            
+            // Fallback: hide placeholder after 3 seconds even if load event doesn't fire
+            setTimeout(() => {
+                if (!placeholder.classList.contains('hidden')) {
+                    videoIframe.classList.add('loaded');
+                    placeholder.classList.add('hidden');
+                    setTimeout(() => {
+                        placeholder.style.display = 'none';
+                    }, 500);
+                }
+            }, 3000);
+        }
 
         // Smart Navigation System
         function initSmartNavigation() {

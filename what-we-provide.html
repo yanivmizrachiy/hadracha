@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes" />
+    <title>מה אנחנו מספקים? - הדרכה מחוז ירושלים</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Assistant:wght@300;400;700;900&family=Heebo:wght@300;400;700;900&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --premium-blue: #001B3D;
+            --gold: #D4AF37;
+            --turquoise: #40E0D0;
+            --white: #FFFFFF;
+        }
+
+        body {
+            font-family: 'Assistant', 'Heebo', sans-serif;
+            direction: rtl;
+            text-align: right;
+            background: var(--premium-blue);
+            background-image: 
+                radial-gradient(circle at 20% 50%, rgba(212, 175, 55, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(64, 224, 208, 0.1) 0%, transparent 50%);
+            color: var(--white);
+            line-height: 1.8;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            min-height: 100vh;
+        }
+
+        /* Navigation Header */
+        .nav-header {
+            background: rgba(0, 27, 61, 0.95);
+            backdrop-filter: blur(20px);
+            border-bottom: 2px solid rgba(212, 175, 55, 0.3);
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
+            padding: 20px;
+            position: sticky;
+            top: 0;
+            z-index: 10000;
+        }
+
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .page-title {
+            font-size: 1.8rem;
+            font-weight: 900;
+            color: var(--gold);
+            text-shadow: 0 0 20px rgba(212, 175, 55, 0.8);
+        }
+
+        /* Back Button - 3D Premium */
+        .back-button {
+            display: inline-block;
+            position: relative;
+            padding: 15px 40px;
+            background: linear-gradient(135deg, 
+                rgba(212, 175, 55, 0.9) 0%, 
+                rgba(255, 215, 0, 0.9) 100%);
+            color: var(--premium-blue);
+            font-size: 1.2rem;
+            font-weight: 900;
+            text-decoration: none;
+            border-radius: 12px;
+            box-shadow: 
+                0 8px 30px rgba(212, 175, 55, 0.4),
+                0 0 20px rgba(212, 175, 55, 0.3),
+                inset 0 2px 0 rgba(255, 255, 255, 0.3),
+                inset 0 -2px 0 rgba(0, 0, 0, 0.2);
+            transition: all 0.3s ease;
+            overflow: hidden;
+            transform-style: preserve-3d;
+        }
+
+        .back-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, 
+                transparent, 
+                rgba(255, 255, 255, 0.3), 
+                transparent);
+            transition: left 0.5s ease;
+        }
+
+        .back-button:hover::before {
+            left: 100%;
+        }
+
+        .back-button:hover {
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 
+                0 12px 40px rgba(212, 175, 55, 0.6),
+                0 0 30px rgba(212, 175, 55, 0.5),
+                inset 0 2px 0 rgba(255, 255, 255, 0.4);
+        }
+
+        .back-button:active {
+            transform: translateY(-2px) scale(1.02);
+        }
+
+        /* Content Container */
+        .content-container {
+            max-width: 1200px;
+            margin: 40px auto;
+            padding: 20px;
+        }
+
+        .glass-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(20px);
+            border-radius: 20px;
+            border: 2px solid rgba(212, 175, 55, 0.3);
+            box-shadow: 
+                0 10px 40px rgba(0, 0, 0, 0.4),
+                0 0 30px rgba(212, 175, 55, 0.2);
+            padding: 40px;
+            margin-bottom: 30px;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: 900;
+            color: var(--gold);
+            text-shadow: 
+                0 0 20px rgba(212, 175, 55, 0.8),
+                0 0 40px rgba(212, 175, 55, 0.6);
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        .content-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .content-list li {
+            padding: 20px 50px 20px 0;
+            margin-bottom: 20px;
+            font-size: 1.3rem;
+            color: var(--white);
+            line-height: 1.8;
+            position: relative;
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 15px;
+            border-right: 4px solid rgba(212, 175, 55, 0.5);
+            transition: all 0.3s ease;
+        }
+
+        .content-list li:hover {
+            background: rgba(255, 255, 255, 0.08);
+            transform: translateX(-5px);
+            box-shadow: 0 5px 20px rgba(212, 175, 55, 0.3);
+        }
+
+        .content-list li::before {
+            content: '✓';
+            position: absolute;
+            right: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 35px;
+            height: 35px;
+            background: linear-gradient(135deg, var(--gold) 0%, #FFD700 100%);
+            color: var(--premium-blue);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 900;
+            font-size: 1.2rem;
+            box-shadow: 
+                0 0 20px rgba(212, 175, 55, 0.6),
+                0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .content-list li strong {
+            color: var(--turquoise);
+            font-weight: 700;
+            text-shadow: 0 0 10px rgba(64, 224, 208, 0.5);
+        }
+
+        .premium-link {
+            color: var(--gold);
+            text-decoration: none;
+            font-weight: 700;
+            border-bottom: 2px solid rgba(212, 175, 55, 0.5);
+            transition: all 0.3s ease;
+            display: inline-block;
+            margin-right: 5px;
+        }
+
+        .premium-link:hover {
+            color: #FFD700;
+            border-bottom-color: var(--gold);
+            text-shadow: 0 0 15px rgba(212, 175, 55, 0.8);
+            transform: translateY(-2px);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-container {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .page-title {
+                font-size: 1.4rem;
+                text-align: center;
+            }
+
+            .back-button {
+                width: 100%;
+                text-align: center;
+            }
+
+            .content-container {
+                padding: 15px;
+                margin: 20px auto;
+            }
+
+            .glass-card {
+                padding: 25px 20px;
+            }
+
+            .section-title {
+                font-size: 1.8rem;
+                margin-bottom: 20px;
+            }
+
+            .content-list li {
+                padding: 15px 45px 15px 0;
+                font-size: 1.1rem;
+                margin-bottom: 15px;
+            }
+
+            .content-list li::before {
+                width: 30px;
+                height: 30px;
+                font-size: 1rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .section-title {
+                font-size: 1.5rem;
+            }
+
+            .content-list li {
+                padding: 12px 40px 12px 0;
+                font-size: 1rem;
+            }
+
+            .content-list li::before {
+                width: 28px;
+                height: 28px;
+                font-size: 0.9rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation Header -->
+    <div class="nav-header">
+        <div class="nav-container">
+            <h1 class="page-title">מה אנחנו מספקים?</h1>
+            <a href="index.html" class="back-button">
+                ← חזרה לעמוד הראשי
+            </a>
+        </div>
+    </div>
+
+    <!-- Content Container -->
+    <div class="content-container">
+        <div class="glass-card">
+            <h2 class="section-title">מה אנחנו מספקים?</h2>
+            <ul class="content-list">
+                <li>רשימת משפטים גיאומטריים ותכונות מומלצות לפרויקט</li>
+                <li><strong>תבנית מובנית לתכנון החידה הוויזואלית</strong> - <a href="template.html" class="premium-link">לחץ כאן לתבנית</a></li>
+                <li><strong>מחוון להערכת התוצרים, כולל היבטי יצירתיות ודיוק מתמטי</strong> - <a href="rubric.html" class="premium-link">לחץ כאן למחוון</a></li>
+                <li>פלטפורמה לשיתוף החידות והתמונות</li>
+                <li>תמיכה טכנית ומתמטית לאורך כל התהליך</li>
+            </ul>
+        </div>
+    </div>
+</body>
+</html>
+
