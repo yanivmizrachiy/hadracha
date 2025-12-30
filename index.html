@@ -280,7 +280,7 @@
 
         .numbered-list li {
             counter-increment: item;
-            padding: 20px 0 20px 60px;
+            padding: 20px 70px 20px 20px;
             position: relative;
             font-size: 1.15rem;
             line-height: 2;
@@ -294,7 +294,7 @@
         .numbered-list li::before {
             content: counter(item);
             position: absolute;
-            right: 20px;
+            right: 15px;
             top: 50%;
             transform: translateY(-50%);
             width: 40px;
@@ -307,6 +307,7 @@
             font-weight: 900;
             color: var(--premium-blue);
             box-shadow: 0 0 20px rgba(212, 175, 55, 0.5);
+            flex-shrink: 0;
         }
 
         /* Links */
@@ -1521,5 +1522,5 @@
             document.head.appendChild(script);
         }
     </script>
-</body>
+  </body>
 </html>
