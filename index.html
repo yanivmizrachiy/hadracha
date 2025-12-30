@@ -1,10 +1,237 @@
 <!DOCTYPE html>
 <html lang="he" dir="rtl">
-  <head>
+<head>
     <meta charset="UTF-8" />
-    <title>לייב עובד</title>
-  </head>
-  <body>
-    <h1>שלום יניב — שידור חי!</h1>
-  </body>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>הדרכה מחוז ירושלים - מיזם המחוז</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Heebo', sans-serif;
+            direction: rtl;
+            text-align: right;
+            background: linear-gradient(135deg, #0a1929 0%, #1a2332 100%);
+            color: #ffffff;
+            line-height: 1.8;
+            overflow-x: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0 4px 20px rgba(255, 215, 0, 0.3);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            font-weight: 900;
+            color: #FFD700;
+            text-shadow: 0 0 20px rgba(255, 215, 0, 0.8), 0 0 40px rgba(255, 215, 0, 0.5);
+            animation: glow 2s ease-in-out infinite alternate;
+        }
+
+        @keyframes glow {
+            from { text-shadow: 0 0 20px rgba(255, 215, 0, 0.8), 0 0 40px rgba(255, 215, 0, 0.5); }
+            to { text-shadow: 0 0 30px rgba(255, 215, 0, 1), 0 0 60px rgba(255, 215, 0, 0.8); }
+        }
+
+        .hero {
+            text-align: center;
+            padding: 60px 20px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero h2 {
+            font-size: 3rem;
+            font-weight: 900;
+            color: #00BFFF;
+            text-shadow: 0 0 30px rgba(0, 191, 255, 0.8);
+            margin-bottom: 30px;
+            animation: pulse 3s ease-in-out infinite;
+            position: relative;
+            z-index: 2;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); text-shadow: 0 0 30px rgba(0, 191, 255, 0.8); }
+            50% { transform: scale(1.05); text-shadow: 0 0 50px rgba(0, 191, 255, 1); }
+        }
+
+        .stars {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            z-index: 1;
+        }
+
+        .star {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: #FFD700;
+            border-radius: 50%;
+            box-shadow: 0 0 10px #FFD700;
+            animation: twinkle 2s infinite;
+        }
+
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.3; transform: scale(1); }
+            50% { opacity: 1; transform: scale(1.5); }
+        }
+
+        .badge {
+            display: inline-block;
+            background: linear-gradient(135deg, #FFD700 0%, #FFA500 100%);
+            color: #1a1a1a;
+            padding: 15px 30px;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 1.2rem;
+            box-shadow: 0 0 30px rgba(255, 215, 0, 0.6);
+            animation: float 3s ease-in-out infinite;
+            margin: 20px 0;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .video-container {
+            max-width: 1200px;
+            margin: 40px auto;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+        }
+
+        .video-container iframe {
+            width: 100%;
+            height: 600px;
+            border-radius: 15px;
+            border: 3px solid rgba(255, 215, 0, 0.3);
+        }
+
+        .section {
+            max-width: 1200px;
+            margin: 60px auto;
+            padding: 40px 20px;
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 20px;
+            border: 1px solid rgba(255, 215, 0, 0.2);
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        .section h3 {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #FFD700;
+            margin-bottom: 25px;
+            text-align: center;
+            text-shadow: 0 0 15px rgba(255, 215, 0, 0.5);
+        }
+
+        .section p, .section li {
+            font-size: 1.1rem;
+            line-height: 1.9;
+            margin-bottom: 15px;
+            color: #e0e0e0;
+        }
+
+        .form-container {
+            max-width: 800px;
+            margin: 40px auto;
+            padding: 30px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 20px;
+            border: 2px solid rgba(255, 215, 0, 0.3);
+        }
+
+        .form-container iframe {
+            width: 100%;
+            min-height: 1200px;
+            border: none;
+            border-radius: 10px;
+        }
+
+        @media (max-width: 768px) {
+            .header h1 { font-size: 1.8rem; }
+            .hero h2 { font-size: 2rem; }
+            .video-container iframe { height: 300px; }
+        }
+
+        .fade-in {
+            animation: fadeIn 1s ease-in;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>הדרכה מחוז ירושלים</h1>
+    </div>
+
+    <div class="hero">
+        <div class="stars" id="stars"></div>
+        <h2>המחשה ויזואלית של משפחות גיאומטריות</h2>
+        <div class="badge">מיזם המחוז</div>
+    </div>
+
+    <div class="video-container fade-in">
+        <iframe 
+            src="https://drive.google.com/file/d/1WhCxZHQ2DoARgKXFQSeTlG8NrNEa_ptz/preview" 
+            allow="autoplay"
+            allowfullscreen>
+        </iframe>
+    </div>
+
+    <div class="section fade-in">
+        <h3>מטרות המיזם</h3>
+        <p>יצירת המחשה ויזואלית חדשנית של משפחות גיאומטריות</p>
+    </div>
+
+    <div class="form-container fade-in">
+        <h3 style="text-align: center; margin-bottom: 20px; color: #FFD700;">טופס הרשמה</h3>
+        <iframe 
+            src="https://docs.google.com/forms/d/e/YOUR_FORM_ID/viewform?embedded=true" 
+            frameborder="0">
+            טוען טופס...
+        </iframe>
+    </div>
+
+    <script>
+        function createStars() {
+            const starsContainer = document.getElementById('stars');
+            for (let i = 0; i < 50; i++) {
+                const star = document.createElement('div');
+                star.className = 'star';
+                star.style.left = Math.random() * 100 + '%';
+                star.style.top = Math.random() * 100 + '%';
+                star.style.animationDelay = Math.random() * 2 + 's';
+                starsContainer.appendChild(star);
+            }
+        }
+        window.addEventListener('DOMContentLoaded', createStars);
+    </script>
+</body>
 </html>
