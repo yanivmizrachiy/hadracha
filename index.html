@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="he" dir="rtl">
-<head>
+  <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>מיזם גיאומטריה עם בינה מלאכותית - הדרכה מחוז ירושלים</title>
@@ -502,8 +502,8 @@
             transform: translateY(0);
         }
     </style>
-</head>
-<body>
+  </head>
+  <body>
     <!-- Top Banner - Gold -->
     <div class="top-banner">
         <p>הדרכה מחוז ירושלים והעיר ירושלים מנח"י בהובלת איילת קריספין</p>
@@ -691,23 +691,73 @@
     </div>
 
     <script>
-        // GSAP Scroll Animations
-        gsap.registerPlugin(ScrollTrigger);
+        // Wait for GSAP to load
+        function initAnimations() {
+            if (typeof gsap === 'undefined' || typeof ScrollTrigger === 'undefined') {
+                console.warn('GSAP not loaded, showing content without animations');
+                // Show all content if GSAP fails
+                document.querySelectorAll('.fade-in-up').forEach(el => {
+                    el.style.opacity = '1';
+                    el.style.transform = 'translateY(0)';
+                });
+                return;
+            }
 
-        // Fade in up animations
-        gsap.utils.toArray('.fade-in-up').forEach((element) => {
-            gsap.from(element, {
-                opacity: 0,
-                y: 50,
-                duration: 1,
-                ease: 'power3.out',
-                scrollTrigger: {
-                    trigger: element,
-                    start: 'top 85%',
-                    toggleActions: 'play none none reverse'
-                }
+            try {
+                // GSAP Scroll Animations
+                gsap.registerPlugin(ScrollTrigger);
+
+                // Mark elements as ready for GSAP animation
+                document.querySelectorAll('.fade-in-up').forEach(el => {
+                    el.classList.add('gsap-ready');
+                });
+
+                // Fade in up animations
+                gsap.utils.toArray('.fade-in-up').forEach((element) => {
+                    gsap.from(element, {
+                        opacity: 0,
+                        y: 50,
+                        duration: 1,
+                        ease: 'power3.out',
+                        scrollTrigger: {
+                            trigger: element,
+                            start: 'top 85%',
+                            toggleActions: 'play none none reverse'
+                        }
+                    });
+                });
+            } catch (error) {
+                console.error('GSAP animation error:', error);
+                // Fallback: show all content
+                document.querySelectorAll('.fade-in-up').forEach(el => {
+                    el.style.opacity = '1';
+                    el.style.transform = 'translateY(0)';
+                });
+            }
+        }
+
+        // Initialize when GSAP is ready
+        if (typeof gsap !== 'undefined') {
+            if (document.readyState === 'loading') {
+                document.addEventListener('DOMContentLoaded', initAnimations);
+            } else {
+                initAnimations();
+            }
+        } else {
+            // Fallback if GSAP doesn't load
+            window.addEventListener('load', () => {
+                setTimeout(() => {
+                    if (typeof gsap === 'undefined') {
+                        document.querySelectorAll('.fade-in-up').forEach(el => {
+                            el.style.opacity = '1';
+                            el.style.transform = 'translateY(0)';
+                        });
+                    } else {
+                        initAnimations();
+                    }
+                }, 1000);
             });
-        });
+        }
 
         // Parallax effect for main title
         gsap.to('.main-title h1', {
@@ -779,5 +829,5 @@
             createGoldParticles();
         });
     </script>
-</body>
+  </body>
 </html>
