@@ -408,18 +408,47 @@
             border: 3px solid var(--premium-blue);
         }
 
-        .timeline-date {
-            font-size: 1.3rem;
+        .timeline-event-title {
+            font-size: 1.4rem;
+            font-weight: 900;
+            color: var(--white);
+            margin-bottom: 12px;
+            text-shadow: 0 0 20px rgba(255, 255, 255, 0.5);
+        }
+
+        .timeline-date-wrapper {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            margin-bottom: 15px;
+        }
+
+        .timeline-date-hebrew {
+            font-size: 1.2rem;
             font-weight: 700;
             color: var(--gold);
-            margin-bottom: 10px;
             text-shadow: 0 0 15px rgba(212, 175, 55, 0.6);
+        }
+
+        .timeline-date-gregorian {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--turquoise);
+            text-shadow: 0 0 10px rgba(64, 224, 208, 0.4);
+        }
+
+        .timeline-day {
+            font-size: 1rem;
+            font-weight: 500;
+            color: rgba(255, 255, 255, 0.8);
+            margin-bottom: 5px;
         }
 
         .timeline-text {
             font-size: 1.1rem;
             color: rgba(255, 255, 255, 0.85);
             line-height: 1.8;
+            margin-top: 10px;
         }
 
         /* Media Embeds */
