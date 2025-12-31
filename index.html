@@ -2028,14 +2028,17 @@
         // Floating animation for glass cards (only if GSAP loaded)
         if (typeof gsap !== 'undefined') {
             try {
-                gsap.utils.toArray('.glass-card').forEach((card, index) => {
-                    gsap.to(card, {
-                        y: -10,
-                        duration: 2 + index * 0.3,
-                        repeat: -1,
-                        yoyo: true,
-                        ease: 'power1.inOut',
-                        delay: index * 0.2
+                // Use requestAnimationFrame for better performance
+                requestAnimationFrame(() => {
+                    gsap.utils.toArray('.glass-card').forEach((card, index) => {
+                        gsap.to(card, {
+                            y: -8,
+                            duration: 2.5 + index * 0.2,
+                            repeat: -1,
+                            yoyo: true,
+                            ease: 'sine.inOut',
+                            delay: index * 0.15
+                        });
                     });
                 });
             } catch (e) {
