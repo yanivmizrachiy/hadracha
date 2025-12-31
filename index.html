@@ -2101,25 +2101,25 @@
             
             if (!videoIframe || !placeholder || !playButton) return;
             
-            // Hide placeholder when video loads
-            videoIframe.addEventListener('load', () => {
-                setTimeout(() => {
-                    videoIframe.classList.add('loaded');
-                    placeholder.classList.add('hidden');
-                    setTimeout(() => {
-                        placeholder.style.display = 'none';
-                    }, 500);
-                }, 500);
-            });
+            // Ensure iframe is hidden initially
+            videoIframe.style.opacity = '0';
+            videoIframe.style.visibility = 'hidden';
             
             // Click handler for play button and placeholder
-            function handlePlayClick() {
-                // Show the iframe and hide placeholder
+            function handlePlayClick(e) {
+                e.preventDefault();
+                e.stopPropagation();
+                
+                // Show the iframe first
+                videoIframe.style.opacity = '1';
+                videoIframe.style.visibility = 'visible';
                 videoIframe.classList.add('loaded');
+                
+                // Hide placeholder with smooth transition
                 placeholder.classList.add('hidden');
                 setTimeout(() => {
                     placeholder.style.display = 'none';
-                }, 300);
+                }, 500);
                 
                 // Try to trigger play (may not work due to cross-origin)
                 try {
@@ -2136,16 +2136,7 @@
             playButton.addEventListener('click', handlePlayClick);
             placeholder.addEventListener('click', handlePlayClick);
             
-            // Fallback: hide placeholder after 5 seconds even if load event doesn't fire
-            setTimeout(() => {
-                if (!placeholder.classList.contains('hidden')) {
-                    videoIframe.classList.add('loaded');
-                    placeholder.classList.add('hidden');
-                    setTimeout(() => {
-                        placeholder.style.display = 'none';
-                    }, 500);
-                }
-            }, 5000);
+            // Don't auto-hide - wait for user click
         }
 
         // Smart Navigation System
