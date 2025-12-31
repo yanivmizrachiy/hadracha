@@ -1998,18 +1998,12 @@
                 initAnimations();
             }
         } else {
-            // Fallback if GSAP doesn't load
+            // Fallback if GSAP doesn't load - FAST (no delay)
+            // Content already visible, just try to init animations
             window.addEventListener('load', () => {
-                setTimeout(() => {
-                    if (typeof gsap === 'undefined') {
-                        document.querySelectorAll('.fade-in-up').forEach(el => {
-                            el.style.opacity = '1';
-                            el.style.transform = 'translateY(0)';
-                        });
-                    } else {
-                        initAnimations();
-                    }
-                }, 1000);
+                if (typeof gsap !== 'undefined') {
+                    initAnimations();
+                }
             });
         }
 
