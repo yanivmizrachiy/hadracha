@@ -2060,31 +2060,37 @@
             `;
             document.body.appendChild(particlesContainer);
 
-            for (let i = 0; i < 30; i++) {
-                const particle = document.createElement('div');
-                particle.style.cssText = `
-                    position: absolute;
-                    width: 4px;
-                    height: 4px;
-                    background: #D4AF37;
-                    border-radius: 50%;
-                    box-shadow: 0 0 10px #D4AF37;
-                    opacity: 0.6;
-                `;
-                particle.style.left = Math.random() * 100 + '%';
-                particle.style.top = Math.random() * 100 + '%';
-                particlesContainer.appendChild(particle);
-
-                gsap.to(particle, {
-                    y: -100,
-                    x: Math.random() * 100 - 50,
-                    opacity: 0,
-                    duration: 3 + Math.random() * 2,
-                    repeat: -1,
-                    ease: 'none',
-                    delay: Math.random() * 2
-                });
-            }
+            // Reduced particle count for better performance
+            const particleCount = 15; // Reduced from 30
+            
+            requestAnimationFrame(() => {
+                for (let i = 0; i < particleCount; i++) {
+                    const particle = document.createElement('div');
+                    particle.style.cssText = `
+                        position: absolute;
+                        width: 3px;
+                        height: 3px;
+                        background: #D4AF37;
+                        border-radius: 50%;
+                        box-shadow: 0 0 8px #D4AF37;
+                        opacity: 0.5;
+                        will-change: transform, opacity;
+                    `;
+                    particle.style.left = Math.random() * 100 + '%';
+                    particle.style.top = Math.random() * 100 + '%';
+                    particlesContainer.appendChild(particle);
+                    
+                    gsap.to(particle, {
+                        y: -100,
+                        x: Math.random() * 100 - 50,
+                        opacity: 0,
+                        duration: 2.5 + Math.random() * 1.5,
+                        repeat: -1,
+                        ease: 'none',
+                        delay: Math.random() * 1.5
+                    });
+                }
+            });
         }
 
         // Initialize on load
