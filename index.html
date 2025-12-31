@@ -2154,15 +2154,15 @@
                     const targetSection = document.querySelector(targetId);
                     
                     if (targetSection) {
-                        // Premium smooth scroll animation
+                        // Premium smooth scroll animation - Faster
                         if (typeof gsap !== 'undefined') {
                             gsap.to(window, {
-                                duration: 1.2,
+                                duration: 0.8,
                                 scrollTo: {
                                     y: targetSection,
                                     offsetY: 100
                                 },
-                                ease: 'power3.inOut'
+                                ease: 'power2.inOut'
                             });
                         } else {
                             // Fallback smooth scroll
