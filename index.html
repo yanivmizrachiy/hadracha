@@ -2294,18 +2294,7 @@
             }
         }
 
-        // Add smooth scroll polyfill if GSAP ScrollToPlugin is not available
-        if (typeof gsap !== 'undefined' && typeof ScrollToPlugin === 'undefined') {
-            // Load ScrollToPlugin
-            const script = document.createElement('script');
-            script.src = 'https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollToPlugin.min.js';
-            script.onload = () => {
-                if (typeof ScrollToPlugin !== 'undefined') {
-                    gsap.registerPlugin(ScrollToPlugin);
-                }
-            };
-            document.head.appendChild(script);
-        }
+        // ScrollToPlugin already loaded in head with defer, no need for polyfill
     </script>
   </body>
 </html>
