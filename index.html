@@ -171,13 +171,13 @@
             width: 100%;
             height: 100%;
             display: flex;
-            flex-direction: column;
             align-items: center;
             justify-content: center;
-            background: linear-gradient(135deg, rgba(0, 27, 61, 0.95) 0%, rgba(10, 26, 46, 0.95) 100%);
-            backdrop-filter: blur(10px);
+            background: rgba(0, 27, 61, 0.7);
+            backdrop-filter: blur(5px);
             z-index: 1;
             transition: opacity 0.5s ease-in-out;
+            cursor: pointer;
         }
         
         .video-placeholder.hidden {
@@ -185,60 +185,60 @@
             pointer-events: none;
         }
         
-        .video-placeholder-icon {
-            width: 120px;
-            height: 120px;
+        .video-play-button {
+            width: 70px;
+            height: 70px;
             border-radius: 50%;
-            background: linear-gradient(135deg, rgba(212, 175, 55, 0.3) 0%, rgba(64, 224, 208, 0.3) 100%);
-            border: 4px solid rgba(212, 175, 55, 0.6);
+            background: linear-gradient(135deg, 
+                rgba(212, 175, 55, 0.95) 0%, 
+                rgba(255, 215, 0, 0.95) 100%);
+            border: 3px solid rgba(255, 255, 255, 0.8);
             display: flex;
             align-items: center;
             justify-content: center;
-            margin-bottom: 30px;
-            animation: placeholderPulse 2s ease-in-out infinite;
             box-shadow: 
-                0 0 40px rgba(212, 175, 55, 0.5),
-                0 0 80px rgba(64, 224, 208, 0.3);
+                0 0 30px rgba(212, 175, 55, 0.8),
+                0 0 60px rgba(212, 175, 55, 0.5),
+                0 8px 25px rgba(0, 0, 0, 0.4);
+            transition: all 0.3s ease;
+            animation: playButtonPulse 2s ease-in-out infinite;
+            position: relative;
         }
         
-        .video-placeholder-icon::before {
+        .video-play-button::before {
             content: '▶';
-            font-size: 4rem;
-            color: var(--white);
-            text-shadow: 
-                0 0 20px rgba(255, 255, 255, 0.8),
-                0 0 40px rgba(212, 175, 55, 0.6);
-            margin-right: 8px; /* RTL adjustment */
+            font-size: 1.8rem;
+            color: var(--premium-blue);
+            font-weight: 900;
+            margin-right: 4px; /* RTL adjustment */
+            text-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
         }
         
-        .video-placeholder-text {
-            color: var(--white);
-            font-size: 1.5rem;
-            font-weight: 700;
-            text-align: center;
-            text-shadow: 
-                0 0 20px rgba(255, 255, 255, 0.6),
-                0 0 40px rgba(64, 224, 208, 0.4);
-            margin-bottom: 15px;
+        .video-play-button:hover {
+            transform: scale(1.15);
+            box-shadow: 
+                0 0 40px rgba(212, 175, 55, 1),
+                0 0 80px rgba(212, 175, 55, 0.7),
+                0 12px 35px rgba(0, 0, 0, 0.5);
         }
         
-        .video-placeholder-loading {
-            color: var(--turquoise);
-            font-size: 1rem;
-            font-weight: 400;
-            text-align: center;
-            opacity: 0.8;
+        .video-play-button:active {
+            transform: scale(1.05);
         }
         
-        .video-loading-spinner {
-            width: 50px;
-            height: 50px;
-            border: 4px solid rgba(212, 175, 55, 0.3);
-            border-top: 4px solid var(--gold);
-            border-right: 4px solid var(--turquoise);
-            border-radius: 50%;
-            animation: spin 1s linear infinite;
-            margin: 20px auto;
+        @keyframes playButtonPulse {
+            0%, 100% {
+                box-shadow: 
+                    0 0 30px rgba(212, 175, 55, 0.8),
+                    0 0 60px rgba(212, 175, 55, 0.5),
+                    0 8px 25px rgba(0, 0, 0, 0.4);
+            }
+            50% {
+                box-shadow: 
+                    0 0 50px rgba(212, 175, 55, 1),
+                    0 0 90px rgba(212, 175, 55, 0.7),
+                    0 12px 35px rgba(0, 0, 0, 0.5);
+            }
         }
         
         @keyframes placeholderPulse {
@@ -1325,29 +1325,13 @@
                 aspect-ratio: 16 / 9;
             }
             
-            .video-placeholder-icon {
-                width: 80px;
-                height: 80px;
-                margin-bottom: 20px;
+            .video-play-button {
+                width: 60px;
+                height: 60px;
             }
             
-            .video-placeholder-icon::before {
-                font-size: 2.5rem;
-            }
-            
-            .video-placeholder-text {
-                font-size: 1.2rem;
-                margin-bottom: 10px;
-            }
-            
-            .video-loading-spinner {
-                width: 40px;
-                height: 40px;
-                margin: 15px auto;
-            }
-            
-            .video-placeholder-loading {
-                font-size: 0.9rem;
+            .video-play-button::before {
+                font-size: 1.5rem;
             }
 
             /* Glass Cards - Mobile */
@@ -1575,29 +1559,13 @@
                 aspect-ratio: 16 / 9;
             }
             
-            .video-placeholder-icon {
-                width: 70px;
-                height: 70px;
-                margin-bottom: 15px;
+            .video-play-button {
+                width: 55px;
+                height: 55px;
             }
             
-            .video-placeholder-icon::before {
-                font-size: 2rem;
-            }
-            
-            .video-placeholder-text {
-                font-size: 1rem;
-                margin-bottom: 8px;
-            }
-            
-            .video-loading-spinner {
-                width: 35px;
-                height: 35px;
-                margin: 12px auto;
-            }
-            
-            .video-placeholder-loading {
-                font-size: 0.8rem;
+            .video-play-button::before {
+                font-size: 1.3rem;
             }
 
             .canva-embed {
@@ -1687,29 +1655,13 @@
                 aspect-ratio: 16 / 9;
             }
             
-            .video-placeholder-icon {
-                width: 60px;
-                height: 60px;
-                margin-bottom: 12px;
+            .video-play-button {
+                width: 50px;
+                height: 50px;
             }
             
-            .video-placeholder-icon::before {
-                font-size: 1.8rem;
-            }
-            
-            .video-placeholder-text {
-                font-size: 0.9rem;
-                margin-bottom: 6px;
-            }
-            
-            .video-loading-spinner {
-                width: 30px;
-                height: 30px;
-                margin: 10px auto;
-            }
-            
-            .video-placeholder-loading {
-                font-size: 0.75rem;
+            .video-play-button::before {
+                font-size: 1.2rem;
             }
 
             .canva-embed {
@@ -1776,15 +1728,12 @@
     <div class="hero-section fade-in-up section-anchor" id="hero">
         <div class="video-wrapper">
             <div class="video-placeholder" id="videoPlaceholder">
-                <div class="video-placeholder-icon"></div>
-                <div class="video-placeholder-text">הסרטון נטען...</div>
-                <div class="video-loading-spinner"></div>
-                <div class="video-placeholder-loading">לחץ על הסרטון כדי להתחיל</div>
+                <div class="video-play-button" id="playButton"></div>
             </div>
             <iframe 
                 id="mainVideo"
-                src="https://drive.google.com/file/d/1WhCxZHQ2DoARgKXFQSeTlG8NrNEa_ptz/preview" 
-                allow="autoplay"
+                src="https://drive.google.com/file/d/1WhCxZHQ2DoARgKXFQSeTlG8NrNEa_ptz/preview?usp=sharing" 
+                allow="autoplay; encrypted-media"
                 allowfullscreen
                 loading="lazy">
             </iframe>
@@ -2108,12 +2057,13 @@
             initVideoPlaceholder();
         });
         
-        // Video Placeholder Handler
+        // Video Placeholder Handler with Play Button
         function initVideoPlaceholder() {
             const videoIframe = document.getElementById('mainVideo');
             const placeholder = document.getElementById('videoPlaceholder');
+            const playButton = document.getElementById('playButton');
             
-            if (!videoIframe || !placeholder) return;
+            if (!videoIframe || !placeholder || !playButton) return;
             
             // Hide placeholder when video loads
             videoIframe.addEventListener('load', () => {
@@ -2126,7 +2076,31 @@
                 }, 500);
             });
             
-            // Fallback: hide placeholder after 3 seconds even if load event doesn't fire
+            // Click handler for play button and placeholder
+            function handlePlayClick() {
+                // Show the iframe and hide placeholder
+                videoIframe.classList.add('loaded');
+                placeholder.classList.add('hidden');
+                setTimeout(() => {
+                    placeholder.style.display = 'none';
+                }, 300);
+                
+                // Try to trigger play (may not work due to cross-origin)
+                try {
+                    const iframeWindow = videoIframe.contentWindow;
+                    if (iframeWindow) {
+                        // Send click event to iframe (may not work)
+                        iframeWindow.postMessage('play', '*');
+                    }
+                } catch (e) {
+                    // Cross-origin restriction - expected
+                }
+            }
+            
+            playButton.addEventListener('click', handlePlayClick);
+            placeholder.addEventListener('click', handlePlayClick);
+            
+            // Fallback: hide placeholder after 5 seconds even if load event doesn't fire
             setTimeout(() => {
                 if (!placeholder.classList.contains('hidden')) {
                     videoIframe.classList.add('loaded');
@@ -2135,7 +2109,7 @@
                         placeholder.style.display = 'none';
                     }, 500);
                 }
-            }, 3000);
+            }, 5000);
         }
 
         // Smart Navigation System
