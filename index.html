@@ -1961,17 +1961,21 @@
                 // Mark body as GSAP loaded
                 document.body.classList.add('gsap-loaded');
 
-                // Fade in up animations
+                // Fade in up animations - FASTER
                 gsap.utils.toArray('.fade-in-up').forEach((element) => {
+                    // Set initial visible state
+                    gsap.set(element, { opacity: 1, y: 0 });
+                    
+                    // Light animation on scroll
                     gsap.from(element, {
-                        opacity: 0,
-                        y: 50,
-                        duration: 1,
-                        ease: 'power3.out',
+                        opacity: 0.7,
+                        y: 20,
+                        duration: 0.5,
+                        ease: 'power2.out',
                         scrollTrigger: {
                             trigger: element,
-                            start: 'top 85%',
-                            toggleActions: 'play none none reverse',
+                            start: 'top 90%',
+                            toggleActions: 'play none none none',
                             onEnter: () => element.classList.add('animated')
                         }
                     });
