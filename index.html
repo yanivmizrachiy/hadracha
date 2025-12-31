@@ -2147,47 +2147,6 @@
             
             if (!scrollToTopBtn) return;
 
-            // Smooth scroll for navigation links
-            navLinks.forEach(link => {
-                link.addEventListener('click', (e) => {
-                    e.preventDefault();
-                    const targetId = link.getAttribute('href');
-                    const targetSection = document.querySelector(targetId);
-                    
-                    if (targetSection) {
-                        // Premium smooth scroll animation - Faster
-                        if (typeof gsap !== 'undefined') {
-                            gsap.to(window, {
-                                duration: 0.8,
-                                scrollTo: {
-                                    y: targetSection,
-                                    offsetY: 100
-                                },
-                                ease: 'power2.inOut'
-                            });
-                        } else {
-                            // Fallback smooth scroll
-                            targetSection.scrollIntoView({
-                                behavior: 'smooth',
-                                block: 'start'
-                            });
-                        }
-
-                        // Update active link
-                        navLinks.forEach(l => l.classList.remove('active'));
-                        link.classList.add('active');
-
-                        // Animate link click
-                        if (typeof gsap !== 'undefined') {
-                            gsap.fromTo(link, 
-                                { scale: 1 },
-                                { scale: 0.95, duration: 0.1, yoyo: true, repeat: 1 }
-                            );
-                        }
-                    }
-                });
-            });
-
             // Scroll to top button
             scrollToTopBtn.addEventListener('click', () => {
                 if (typeof gsap !== 'undefined') {
