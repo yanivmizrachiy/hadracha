@@ -2141,12 +2141,11 @@
             // Don't auto-hide - wait for user click
         }
 
-        // Smart Navigation System
+        // Scroll to Top Button System (Navigation menu removed)
         function initSmartNavigation() {
-            const nav = document.getElementById('smartNav');
             const scrollToTopBtn = document.getElementById('scrollToTop');
-            const navLinks = document.querySelectorAll('.nav-link');
-            const sections = document.querySelectorAll('.section-anchor');
+            
+            if (!scrollToTopBtn) return;
 
             // Smooth scroll for navigation links
             navLinks.forEach(link => {
