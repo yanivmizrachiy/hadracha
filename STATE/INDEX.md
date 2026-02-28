@@ -1,0 +1,1 @@
+# 📌 CONTROL INDEX — hadracha\n\n## 2026-03-01T00:33:01+02:00 — init\n
